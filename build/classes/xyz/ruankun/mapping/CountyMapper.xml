@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.ruankun.dao.CountyMapper" >
+  <resultMap id="BaseResultMap" type="xyz.ruankun.model.County" >
+    <result column="OBJECTID" property="objectid" jdbcType="INTEGER" />
+    <result column="ProName" property="proname" jdbcType="VARCHAR" />
+    <result column="ProCode" property="procode" jdbcType="VARCHAR" />
+    <result column="CityName" property="cityname" jdbcType="VARCHAR" />
+    <result column="CityCode" property="citycode" jdbcType="VARCHAR" />
+    <result column="CouName" property="couname" jdbcType="VARCHAR" />
+    <result column="CouCode" property="coucode" jdbcType="VARCHAR" />
+    <result column="TownName" property="townname" jdbcType="VARCHAR" />
+    <result column="TownCode" property="towncode" jdbcType="VARCHAR" />
+    <result column="VilName" property="vilname" jdbcType="VARCHAR" />
+    <result column="VilCode" property="vilcode" jdbcType="VARCHAR" />
+    <result column="NamSec" property="namsec" jdbcType="VARCHAR" />
+    <result column="NewArea" property="newarea" jdbcType="REAL" />
+    <result column="TrUpArea" property="truparea" jdbcType="REAL" />
+    <result column="CommFina" property="commfina" jdbcType="REAL" />
+    <result column="FieAdju" property="fieadju" jdbcType="REAL" />
+    <result column="IrriDra" property="irridra" jdbcType="REAL" />
+    <result column="FaWaCoPr" property="fawacopr" jdbcType="REAL" />
+    <result column="TillWa" property="tillwa" jdbcType="REAL" />
+    <result column="FerFar" property="ferfar" jdbcType="REAL" />
+    <result column="LeadInd" property="leadind" jdbcType="VARCHAR" />
+    <result column="SuppPro" property="supppro" jdbcType="VARCHAR" />
+    <result column="Year" property="year" jdbcType="VARCHAR" />
+    <result column="yesno" property="yesno" jdbcType="VARCHAR" />
+    <result column="YearShow" property="yearshow" jdbcType="VARCHAR" />
+    <result column="ConsType" property="constype" jdbcType="VARCHAR" />
+    <result column="FarmlandAr" property="farmlandar" jdbcType="REAL" />
+    <result column="Shape_Leng" property="shapeLeng" jdbcType="REAL" />
+    <result column="Shape_Area" property="shapeArea" jdbcType="REAL" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    OBJECTID, ProName, ProCode, CityName, CityCode,CouName, CouCode,TownName, TownCode,VilName, VilCode,NamSec
+  </sql>
+  <select id="selectByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from county
+    where CouCode = #{coucode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByProCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from county
+    where ProCode = #{procode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from county
+    where OBJECTID = #{OBJECTID,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByCityName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from county
+    where CityName = #{cityname,jdbcType=VARCHAR}
+  </select>
+  
+  <insert id="insert" parameterType="xyz.ruankun.model.County" >
+    insert into county (OBJECTID, ProName, ProCode, 
+      CityName, CityCode, CouName, 
+      CouCode, TownName, TownCode, 
+      VilName, VilCode, NamSec, 
+      NewArea, TrUpArea, CommFina, 
+      FieAdju, IrriDra, FaWaCoPr, 
+      TillWa, FerFar, LeadInd, 
+      SuppPro, Year, yesno, 
+      YearShow, ConsType, FarmlandAr, 
+      Shape_Leng, Shape_Area)
+    values (#{objectid,jdbcType=INTEGER}, #{proname,jdbcType=VARCHAR}, #{procode,jdbcType=VARCHAR}, 
+      #{cityname,jdbcType=VARCHAR}, #{citycode,jdbcType=VARCHAR}, #{couname,jdbcType=VARCHAR}, 
+      #{coucode,jdbcType=VARCHAR}, #{townname,jdbcType=VARCHAR}, #{towncode,jdbcType=VARCHAR}, 
+      #{vilname,jdbcType=VARCHAR}, #{vilcode,jdbcType=VARCHAR}, #{namsec,jdbcType=VARCHAR}, 
+      #{newarea,jdbcType=REAL}, #{truparea,jdbcType=REAL}, #{commfina,jdbcType=REAL}, 
+      #{fieadju,jdbcType=REAL}, #{irridra,jdbcType=REAL}, #{fawacopr,jdbcType=REAL}, 
+      #{tillwa,jdbcType=REAL}, #{ferfar,jdbcType=REAL}, #{leadind,jdbcType=VARCHAR}, 
+      #{supppro,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, #{yesno,jdbcType=VARCHAR}, 
+      #{yearshow,jdbcType=VARCHAR}, #{constype,jdbcType=VARCHAR}, #{farmlandar,jdbcType=REAL}, 
+      #{shapeLeng,jdbcType=REAL}, #{shapeArea,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.ruankun.model.County" >
+    insert into county
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="objectid != null" >
+        OBJECTID,
+      </if>
+      <if test="proname != null" >
+        ProName,
+      </if>
+      <if test="procode != null" >
+        ProCode,
+      </if>
+      <if test="cityname != null" >
+        CityName,
+      </if>
+      <if test="citycode != null" >
+        CityCode,
+      </if>
+      <if test="couname != null" >
+        CouName,
+      </if>
+      <if test="coucode != null" >
+        CouCode,
+      </if>
+      <if test="townname != null" >
+        TownName,
+      </if>
+      <if test="towncode != null" >
+        TownCode,
+      </if>
+      <if test="vilname != null" >
+        VilName,
+      </if>
+      <if test="vilcode != null" >
+        VilCode,
+      </if>
+      <if test="namsec != null" >
+        NamSec,
+      </if>
+      <if test="newarea != null" >
+        NewArea,
+      </if>
+      <if test="truparea != null" >
+        TrUpArea,
+      </if>
+      <if test="commfina != null" >
+        CommFina,
+      </if>
+      <if test="fieadju != null" >
+        FieAdju,
+      </if>
+      <if test="irridra != null" >
+        IrriDra,
+      </if>
+      <if test="fawacopr != null" >
+        FaWaCoPr,
+      </if>
+      <if test="tillwa != null" >
+        TillWa,
+      </if>
+      <if test="ferfar != null" >
+        FerFar,
+      </if>
+      <if test="leadind != null" >
+        LeadInd,
+      </if>
+      <if test="supppro != null" >
+        SuppPro,
+      </if>
+      <if test="year != null" >
+        Year,
+      </if>
+      <if test="yesno != null" >
+        yesno,
+      </if>
+      <if test="yearshow != null" >
+        YearShow,
+      </if>
+      <if test="constype != null" >
+        ConsType,
+      </if>
+      <if test="farmlandar != null" >
+        FarmlandAr,
+      </if>
+      <if test="shapeLeng != null" >
+        Shape_Leng,
+      </if>
+      <if test="shapeArea != null" >
+        Shape_Area,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="objectid != null" >
+        #{objectid,jdbcType=INTEGER},
+      </if>
+      <if test="proname != null" >
+        #{proname,jdbcType=VARCHAR},
+      </if>
+      <if test="procode != null" >
+        #{procode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityname != null" >
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="citycode != null" >
+        #{citycode,jdbcType=VARCHAR},
+      </if>
+      <if test="couname != null" >
+        #{couname,jdbcType=VARCHAR},
+      </if>
+      <if test="coucode != null" >
+        #{coucode,jdbcType=VARCHAR},
+      </if>
+      <if test="townname != null" >
+        #{townname,jdbcType=VARCHAR},
+      </if>
+      <if test="towncode != null" >
+        #{towncode,jdbcType=VARCHAR},
+      </if>
+      <if test="vilname != null" >
+        #{vilname,jdbcType=VARCHAR},
+      </if>
+      <if test="vilcode != null" >
+        #{vilcode,jdbcType=VARCHAR},
+      </if>
+      <if test="namsec != null" >
+        #{namsec,jdbcType=VARCHAR},
+      </if>
+      <if test="newarea != null" >
+        #{newarea,jdbcType=REAL},
+      </if>
+      <if test="truparea != null" >
+        #{truparea,jdbcType=REAL},
+      </if>
+      <if test="commfina != null" >
+        #{commfina,jdbcType=REAL},
+      </if>
+      <if test="fieadju != null" >
+        #{fieadju,jdbcType=REAL},
+      </if>
+      <if test="irridra != null" >
+        #{irridra,jdbcType=REAL},
+      </if>
+      <if test="fawacopr != null" >
+        #{fawacopr,jdbcType=REAL},
+      </if>
+      <if test="tillwa != null" >
+        #{tillwa,jdbcType=REAL},
+      </if>
+      <if test="ferfar != null" >
+        #{ferfar,jdbcType=REAL},
+      </if>
+      <if test="leadind != null" >
+        #{leadind,jdbcType=VARCHAR},
+      </if>
+      <if test="supppro != null" >
+        #{supppro,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="yesno != null" >
+        #{yesno,jdbcType=VARCHAR},
+      </if>
+      <if test="yearshow != null" >
+        #{yearshow,jdbcType=VARCHAR},
+      </if>
+      <if test="constype != null" >
+        #{constype,jdbcType=VARCHAR},
+      </if>
+      <if test="farmlandar != null" >
+        #{farmlandar,jdbcType=REAL},
+      </if>
+      <if test="shapeLeng != null" >
+        #{shapeLeng,jdbcType=REAL},
+      </if>
+      <if test="shapeArea != null" >
+        #{shapeArea,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>
