@@ -121,13 +121,28 @@ function showSelected(){
 		       	OBJECTID:OBJECTID,
 		       	role:role
 			}, function(str){
+				//设置div里面的值
+				str = JSON.parse(str);  //转换为对象
+				$('#SuppPro').text(str.supppro);
+				$('#area').text(str.proname + str.cityname + str.couname + str.townname + str.vilname);
+				$('#namesec').text(str.namsec);
+				$('#FarmlandAr').text(str.farmlandar);
+				$('#newArea').text(str.newarea);
+				$('#TrUpArea').text(str.truparea);
+				$('#CommFina').text(str.commfina);
+				$('#FieAdju').text(str.fieadju);
+				$('#IrriDra').text(str.irridra);
+				$('#TillWa').text(str.tillwa);
+				$('#FerFar').text(str.ferfar);
+				$('#FaWaCoPr').text(str.fawacopr);
+				//....设置div值完成
 				layui.use('layer', function(){
 				  var layer = layui.layer;
 				  layer.open({
 				  	    type: 1,
 				  	    title:'查询结果',
-				  	    area:['800px','500px'],
-				  	    content: JSON.stringify(selectedNodePath) +"\n---fengexian---\n"+ str //注意，如果str是object，那么需要字符拼接。
+				  	    area:['800px','510px'],
+				  	    content: $('#selectedNode-info').html() //注意，如果str是object，那么需要字符拼接。
 				  	  });
 				});
 	  	});

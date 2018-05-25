@@ -12,6 +12,11 @@
 		
 		<link rel="stylesheet" href="http://113.54.15.13/arcgis_js_v47_api/arcgis_js_api/library/4.7/dijit/themes/claro/claro.css" />
 	    <link rel="stylesheet" href="http://113.54.15.13/arcgis_js_v47_api/arcgis_js_api/library/4.7/esri/css/main.css" />
+	    <style type="text/css">
+	    	.title{
+	    		font-weight:700;
+	    	}
+	    </style>
 	</head>
 	
 	<body>
@@ -130,9 +135,67 @@
             });
         });
     </script>
-    <div id="selectedNode-info" style="display:none">
-    	<div>高标准农田建设情况</div>
-    	
+    <div id="selectedNode-info" style="display:none;width: 800px; height: 400px; background-color: #EEEEEE; margin: auto;">
+    	<div style="width: 100%; height: 50px; line-height: 50px; text-align: center;">
+    		<h2>高标准农田建设情况</h2>
+    	</div>
+    	<div class="layui-row">
+    		<table class="layui-table">
+			<colgroup>
+			    <col width="150">
+			    <col width="200">
+			    <col>
+			  </colgroup>
+			  <tbody>
+			    <tr>
+			      <td class="title">区域范围</td>
+			      <td id="area"></td>
+			      <td class="title">片区名称</td>
+			      <td id="namesec"></td>
+			    </tr>
+			    <tr>
+			      <td class="title">耕地面积(万亩)</td>
+			      <td id="FarmlandAr"></td>
+			      <td class="title">新建面积(亩)</td>
+			      <td id="newArea"></td>
+			    </tr>
+			    <tr>
+			      <td class="title">改造耕地面积(亩)</td>
+			      <td id="TrUpArea"></td>
+			      <td class="title">财政投资(万元)</td>
+			      <td id="CommFina"></td>
+			    </tr>
+			    <tr>
+			      <td colspan="1" class="title">主要建设内容</td>
+			      <td colspan="3">
+			      	<table class="layui-table">
+			      		<tr>
+				      		<td class="title">田型调整(亩)</td>
+				      		<td id="FieAdju"></td>
+				      		<td class="title">排灌渠(千米)</td>
+				      		<td id="IrriDra"></td>
+				      	</tr>
+				      	<tr>
+				      		<td class="title">机耕路(千米)</td>
+				      		<td id="TillWa"></td>
+				      		<td class="title">地力培肥(亩)</td>
+				      		<td id="FerFar"></td>
+				      	</tr>
+				      	<tr>
+				      		<td colspan="2" class="title">小型水利工程(座)</td>
+				      		<td colspan="2" id="FaWaCoPr"></td>
+				      	</tr>
+			      	</table>
+			      </td>
+			    </tr>
+			    <tr>
+			    	<td colspan="1" class="title">支撑项目</td>
+			    	<td colspan="3" id="SuppPro">
+			    	</td>
+			    </tr>
+			  </tbody>
+			</table>
+    	</div>
     </div>
 	</body>
 </html>
