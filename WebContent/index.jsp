@@ -7,6 +7,8 @@
 <title>welcome to gaobiao!</title>
 </head>
 <body>
-
+	<script type="text/javascript">
+		window.location.href='res/login.html';
+	</script>
 </body>
 </html>

@@ -10,7 +10,7 @@ package xyz.ruankun.bean;
  * @author Sherivey.Ruan
  *
  */
-public class UserSession {
+public class UserSession implements Comparable<String> {
 
 	//session id
 	private String sessionId;
@@ -42,6 +42,24 @@ public class UserSession {
 
 	public void setObjectId(Integer objectId) {
 		this.objectId = objectId;
+	}
+
+	@Override
+	public int compareTo(String o) {
+		if(this.role.equals("province")) {
+			//待完成
+		}else if(this.role.equals("city")) {
+			//待完成
+		}else if(this.role.equals("county")) {
+			//待完成
+		}else if(this.role.equals("namesec")) {
+			//待完成
+		}else if(this.role.equals("town")) {
+			//待完成
+		}else if(this.role.equals("village")) {
+			//待完成
+		}
+		return 0;
 	}
 	
 }

@@ -142,7 +142,7 @@ public class DeepNode<T> {
 		if(t == null) return;
 		this.name = t.getTownname();
 		this.code = t.getTowncode();
-		this.role = "namesec";
+		this.role = "town";
 		this.id = t.getObjectid();
 		this.spread = true;
 		this.custom = custom;
@@ -152,7 +152,7 @@ public class DeepNode<T> {
 		if(v == null) return;
 		this.name = v.getVilname();
 		this.code = v.getVilcode();
-		this.role = "namesec";
+		this.role = "village";
 		this.id = v.getObjectid();
 		this.spread = true;
 		this.custom = custom;

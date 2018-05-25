@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
@@ -40,7 +41,7 @@ public class TreeController {
 	 */
 	@RequestMapping(value="/current")
 	@ResponseBody
-	public String currentNodes(String sessionKey,HttpSession session) {
+	public String currentNodes(@RequestParam String sessionKey,HttpSession session) {
 		//get user first
 		UserSession userSession = (UserSession)session.getAttribute("user");
 		//if user is null throw exception
@@ -53,7 +54,58 @@ public class TreeController {
 		}
 		String role = userSession.getRole();
 		Integer userid = userSession.getObjectId();
+		System.out.println(role + ", " + userid);
 		String rs = treeService.getFatherAndSelf(role,userid);
+		System.out.println(rs);
+		if(rs != null) {
+			return rs;
+		}else {
+			//didn't get  the nodes info.return false info.
+			DeepNode<String> dNode = new DeepNode<>();
+			dNode.setCustom("Didn't get the nodes info");
+			return JSON.toJSONString(dNode);
+		}
+	}
+	
+	@RequestMapping(value="/children")
+	@ResponseBody
+	public String childrenNodes(@RequestParam String OBJECTID,HttpSession session,
+			@RequestParam String sessionKey,
+			@RequestParam String role) {
+		//get user first
+		UserSession userSession = (UserSession)session.getAttribute("user");
+		//if user is null throw exception
+		if(userSession == null) {
+			return LoginReturn.jsonFail("timeout..please retry!");
+		}
+		//if the sessionid is changed by user itself.
+		if(userSession != null && !userSession.getSessionId().equals(sessionKey)) {
+			return LoginReturn.jsonFail("wrong sessionid");
+		}
+		String rs = treeService.getChildren(OBJECTID, role);
+		if(rs != null) {
+			return rs;
+		}else {
+			//didn't get  the nodes info.return false info.
+			return null;
+		}
+	}
+	@RequestMapping(value="/nodeinfo")
+	@ResponseBody
+	public String nodeInfo(@RequestParam String sessionKey,HttpSession session,
+			@RequestParam String OBJECTID,
+			@RequestParam String role) {
+		//get user first
+		UserSession userSession = (UserSession)session.getAttribute("user");
+		//if user is null throw exception
+		if(userSession == null) {
+			return LoginReturn.jsonFail("timeout..please retry!");
+		}
+		//if the sessionid is changed by user itself.
+		if(userSession != null && !userSession.getSessionId().equals(sessionKey)) {
+			return LoginReturn.jsonFail("wrong sessionid");
+		}
+		String rs = treeService.getNodeInfo(OBJECTID,role);
 		if(rs != null) {
 			return rs;
 		}else {

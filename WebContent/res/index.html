@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>四川省高标准农田建设管理信息系统</title>
+		
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		
+		<link rel="stylesheet" type="text/css" href="css/zTreeStyle/zTreeStyle.css"/>
+		<link rel="stylesheet" type="text/css" href="css/metroStyle/metroStyle.css"/>
+		
+		<link rel="stylesheet" href="http://113.54.15.13/arcgis_js_v47_api/arcgis_js_api/library/4.7/dijit/themes/claro/claro.css" />
+	    <link rel="stylesheet" href="http://113.54.15.13/arcgis_js_v47_api/arcgis_js_api/library/4.7/esri/css/main.css" />
+	</head>
+	
+	<body>
+		<!--header firstly-->
+		<div class="layui-header">
+			<ul class="layui-nav layui-layout-left">
+				<li id="nav-left-2" class="layui-nav-item">四川省高标准农田建设管理信息系统</li>
+			</ul>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item layui-hide-xs"><a id="bav-1" class="gaobiao-nav-item" href="http://www.sicau.edu.cn/">四川农业大学</a></li>
+				<li class="layui-nav-item layui-hide-xs"><a id="bav-2" class="gaobiao-nav-item" href="http://www.scagri.gov.cn/">四川省农业厅</a></li>
+				<li class="layui-nav-item layui-hide-xs"><a id="bav-3" class="gaobiao-nav-item" href="javascript:loginoff();">退出系统</a></li>
+			</ul>
+		</div>
+		<!--侧导航栏-->
+		<div class="layui-side layui-side-menu" id="side">
+			<div class="hiden-display-btn">
+				<a onclick="sidebarevent()">
+                    <i class="layui-icon" id="i-hide">&#xe65a;</i>
+                    <i class="layui-icon" id="i-show" style="display: none;">&#xe65b;</i>
+                </a>
+			</div>
+			<div class="layui-side-scroll gaobiao-scroll">
+				<div class="layui-logo" lay-href>
+					<span id="logo-title">
+						四川省高标准农田
+					</span>
+					<i class="layui-icon" id="i-logo" style="display: none;">&#xe65f;</i>
+				</div>
+				<ul id="gaobiao-tree" class="ztree"></ul>
+			</div>
+		</div>
+		<!--主体内容-->
+		<div class="layui-body" id="content-body">
+			<div class="layui-row">
+				<div class="layui-btn-group btns">
+					<button class="layui-btn layui-btn-normal" onclick="showSelected()">查询信息</button>
+					<button class="layui-btn layui-btn-normal btn-switch active-map" data-id="0" id="btn0" style="display:none;">地图1</button>
+					<button class="layui-btn layui-btn-normal btn-switch" data-id="1" id="btn1" style="display:none;">地图2</button>
+					<button class="layui-btn layui-btn-normal btn-switch" data-id="2" id="btn2" style="display:none;">地图3</button>
+				</div>
+			</div>
+			<!--tree-->
+			<div class="gaobiao-map" id="viewDiv" style="width: 96%;height: 90%;margin: 30px;">
+			</div>
+		</div>
+	
+	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script src="layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://113.54.15.13/arcgis_js_v47_api/arcgis_js_api/library/4.7/dojo/dojo.js"></script>
+	<script src="js/jquery.ztree.core.js" type="text/javascript" charset="utf-8"></script>
+	<!--ztree的初始化-->
+	<script src="js/ztreeCreate.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+        require(["esri/config"], function(esriConfig) {
+            esriConfig.request.corsEnabledServers.push("113.54.15.13");
+        });
+        require([
+            "esri/views/MapView",
+            "esri/WebMap",
+            "dojo/on",
+            "dojo/domReady!"
+        ], function(
+                MapView, WebMap,
+                on
+        ) {
+
+            var webmapids = [
+                "ad5759bf407c4554b748356ebe1886e5",
+                "71ba2a96c368452bb73d54eadbd59faa",
+                "45ded9b3e0e145139cc433b503a8f5ab"
+            ];
+
+            /************************************************************
+             * Create multiple WebMap instances
+             ************************************************************/
+            var webmaps = webmapids.map(function(webmapid) {
+                return new WebMap({
+                    portalItem: { // autocasts as new PortalItem()
+                        id: webmapid
+                    }
+                });
+            });
+
+            /************************************************************
+             * Initialize the View with the first WebMap
+             ************************************************************/
+            var view = new MapView({
+                map: webmaps[0],
+                container: "viewDiv"
+            });
+
+            on(document.querySelector(".btns"), ".btn-switch:click", function(
+                    event) {
+                /************************************************************
+                 * On a button click, change the map of the View
+                 ************************************************************/
+                var id = event.target.getAttribute("data-id");
+                if (id) {
+                    var webmap = webmaps[id];
+                    view.map = webmap;
+                    var nodes = document.querySelectorAll(".btn-switch");
+                    for (var idx = 0; idx < nodes.length; idx++) {
+                        var node = nodes[idx];
+                        var mapIndex = node.getAttribute("data-id");
+                        if (mapIndex === id) {
+                            node.classList.add("active-map");
+                        } else {
+                            node.classList.remove("active-map");
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <div id="selectedNode-info" style="display:none">
+    	<div>高标准农田建设情况</div>
+    	
+    </div>
+	</body>
+</html>

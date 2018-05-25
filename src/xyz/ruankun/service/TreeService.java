@@ -12,9 +12,11 @@ public interface TreeService {
 	/**
 	 * get user's children,input the role and id in mysql.
 	 * return the direct children
-	 * @param OBJECTID
-	 * @param role
+	 * @param OBJECTID  id of data row
+	 * @param role role! you know it!
 	 * @return direct children
 	 */
-	String getChildren(Integer OBJECTID,String role);
+	String getChildren(String OBJECTID,String role);
+
+	String getNodeInfo(String oBJECTID, String role);
 }

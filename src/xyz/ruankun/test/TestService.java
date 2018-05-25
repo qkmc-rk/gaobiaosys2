@@ -18,6 +18,6 @@ public class TestService {
 	@Test
 	public void m1() {
 		TreeService treeService = (TreeService)ctx.getBean("treeService");
-		System.out.println(treeService.getFatherAndSelf("village", 7));
+		System.out.println(treeService.getChildren("168", "namesec"));
 	}
 }

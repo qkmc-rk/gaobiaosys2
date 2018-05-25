@@ -35,6 +35,8 @@
   
   <sql id="Base_Column_List" >
     OBJECTID, ProName, ProCode, CityName, CityCode,CouName, CouCode,TownName, TownCode,VilName, VilCode,NamSec
+    ,NewArea,TrUpArea,CommFina,FieAdju,IrriDra,FaWacoPr,TillWa,FerFar,LeadInd,
+    SuppPro,Year,yesno,YearShow,ConsType,FarmlandAr,Shape_leng,Shape_Area
   </sql>
   <select id="selectByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
