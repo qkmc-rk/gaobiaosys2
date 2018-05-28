@@ -49,7 +49,7 @@
     select 
     <include refid="Base_Column_List" />
     from city
-    where ProName = #{proname,jdbcType=VARCHAR}
+    where ProName = #{proname,jdbcType=VARCHAR} order by CityCode asc
   </select>
   
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -63,7 +63,7 @@
     select 
     <include refid="Base_Column_List" />
     from city
-    where ProCode = #{procode,jdbcType=VARCHAR}
+    where ProCode = #{procode,jdbcType=VARCHAR} order by CityCode asc
   </select>
   
   <insert id="insert" parameterType="xyz.ruankun.model.City" >

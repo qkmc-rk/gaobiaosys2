@@ -13,7 +13,7 @@ public interface CityMapper {
 
 	List<City> selectByProCode(String procode);
 
-	List<xyz.ruankun.model.City> selectByProName(String proname);
+	List<City> selectByProName(String proname);
 	
 	City selectById(String OBJECTID_1);
 }

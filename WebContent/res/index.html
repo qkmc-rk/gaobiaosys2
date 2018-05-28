@@ -11,21 +11,22 @@
 		<link rel="stylesheet" type="text/css" href="css/metroStyle/metroStyle.css"/>
 		
 		<link rel="stylesheet" href="http://113.54.15.13/arcgis_js_v47_api/arcgis_js_api/library/4.7/dijit/themes/claro/claro.css" />
-	    <link rel="stylesheet" href="http://113.54.15.13/arcgis_js_v47_api/arcgis_js_api/library/4.7/esri/css/main.css" />
+    	<link rel="stylesheet" href="http://113.54.15.13/arcgis_js_v47_api/arcgis_js_api/library/4.7/esri/css/main.css" />
 	    <style type="text/css">
 	    	.title{
 	    		font-weight:700;
 	    	}
 	    </style>
+	    <link rel="stylesheet" type="text/css" href="css/header.css"/>
 	</head>
 	
 	<body>
 		<!--header firstly-->
-		<div class="layui-header">
-			<ul class="layui-nav layui-layout-left">
+		<div class="header">
+			<ul class="nav-left">
 				<li id="nav-left-2" class="layui-nav-item">四川省高标准农田建设管理信息系统</li>
 			</ul>
-			<ul class="layui-nav layui-layout-right">
+			<ul class="nav-right">
 				<li class="layui-nav-item layui-hide-xs"><a id="bav-1" class="gaobiao-nav-item" href="http://www.sicau.edu.cn/">四川农业大学</a></li>
 				<li class="layui-nav-item layui-hide-xs"><a id="bav-2" class="gaobiao-nav-item" href="http://www.scagri.gov.cn/">四川省农业厅</a></li>
 				<li class="layui-nav-item layui-hide-xs"><a id="bav-3" class="gaobiao-nav-item" href="javascript:loginoff();">退出系统</a></li>
@@ -39,19 +40,20 @@
                     <i class="layui-icon" id="i-show" style="display: none;">&#xe65b;</i>
                 </a>
 			</div>
-			<div class="layui-side-scroll gaobiao-scroll">
-				<div class="layui-logo" lay-href>
+			<div class="layui-side-scroll gaobiao-scroll" style="overflow:auto;">
+				<!-- <div class="layui-logo" lay-href>
 					<span id="logo-title">
 						四川省高标准农田
 					</span>
 					<i class="layui-icon" id="i-logo" style="display: none;">&#xe65f;</i>
-				</div>
+				</div> -->
 				<ul id="gaobiao-tree" class="ztree"></ul>
 			</div>
 		</div>
 		<!--主体内容-->
 		<div class="layui-body" id="content-body">
-			<div class="layui-row">
+			<!--这一行按钮组不能删除，不能删除！不能删除！重要的事情说三遍  -->
+			<div class="layui-row"  style="display:none;">
 				<div class="layui-btn-group btns">
 					<button class="layui-btn layui-btn-normal" onclick="showSelected()">查询信息</button>
 					<button class="layui-btn layui-btn-normal btn-switch active-map" data-id="0" id="btn0" style="display:none;">地图1</button>
@@ -60,81 +62,22 @@
 				</div>
 			</div>
 			<!--tree-->
-			<div class="gaobiao-map" id="viewDiv" style="width: 96%;height: 90%;margin: 30px;">
+			<div class="gaobiao-map" id="viewDiv" style="width: 100%;height: 99%;margin-top: 36px;">
 			</div>
 		</div>
 	
 	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
 	<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
-	<script src="layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
 	<script src="http://113.54.15.13/arcgis_js_v47_api/arcgis_js_api/library/4.7/dojo/dojo.js"></script>
 	<script src="js/jquery.ztree.core.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.ztree.exedit.js" type="text/javascript" charset="utf-8"></script>
+  	<script src="js/jquery.ztree.excheck.js" type="text/javascript" charset="utf-8"></script>
+  	<script src="js/jquery.ztree.exhide.js" type="text/javascript" charset="utf-8"></script>
 	<!--ztree的初始化-->
 	<script src="js/ztreeCreate.js" type="text/javascript" charset="utf-8"></script>
-	<script>
-        require(["esri/config"], function(esriConfig) {
-            esriConfig.request.corsEnabledServers.push("113.54.15.13");
-        });
-        require([
-            "esri/views/MapView",
-            "esri/WebMap",
-            "dojo/on",
-            "dojo/domReady!"
-        ], function(
-                MapView, WebMap,
-                on
-        ) {
-
-            var webmapids = [
-                "ad5759bf407c4554b748356ebe1886e5",
-                "71ba2a96c368452bb73d54eadbd59faa",
-                "45ded9b3e0e145139cc433b503a8f5ab"
-            ];
-
-            /************************************************************
-             * Create multiple WebMap instances
-             ************************************************************/
-            var webmaps = webmapids.map(function(webmapid) {
-                return new WebMap({
-                    portalItem: { // autocasts as new PortalItem()
-                        id: webmapid
-                    }
-                });
-            });
-
-            /************************************************************
-             * Initialize the View with the first WebMap
-             ************************************************************/
-            var view = new MapView({
-                map: webmaps[0],
-                container: "viewDiv"
-            });
-
-            on(document.querySelector(".btns"), ".btn-switch:click", function(
-                    event) {
-                /************************************************************
-                 * On a button click, change the map of the View
-                 ************************************************************/
-                var id = event.target.getAttribute("data-id");
-                if (id) {
-                    var webmap = webmaps[id];
-                    view.map = webmap;
-                    var nodes = document.querySelectorAll(".btn-switch");
-                    for (var idx = 0; idx < nodes.length; idx++) {
-                        var node = nodes[idx];
-                        var mapIndex = node.getAttribute("data-id");
-                        if (mapIndex === id) {
-                            node.classList.add("active-map");
-                        } else {
-                            node.classList.remove("active-map");
-                        }
-                    }
-                }
-            });
-        });
-    </script>
+	<script src="js/gisinit.js" type="text/javascript" charset="utf-8"></script>
     <div id="selectedNode-info" style="display:none;width: 800px; height: 400px; background-color: #EEEEEE; margin: auto;">
     	<div style="width: 100%; height: 50px; line-height: 50px; text-align: center;">
     		<h2>高标准农田建设情况</h2>

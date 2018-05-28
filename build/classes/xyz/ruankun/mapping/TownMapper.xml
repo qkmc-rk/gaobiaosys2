@@ -56,14 +56,14 @@
     select 
     <include refid="Base_Column_List" />
     from town
-    where NamSec = #{currentNodeName,jdbcType=VARCHAR}
+    where NamSec = #{currentNodeName,jdbcType=VARCHAR} order by TownCode asc
   </select>
   
   <select id="selectByProCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from town
-    where ProCode = #{procode,jdbcType=VARCHAR}
+    where ProCode = #{procode,jdbcType=VARCHAR} order by TownCode asc
   </select>
   
   <insert id="insert" parameterType="xyz.ruankun.model.Town" >

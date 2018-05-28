@@ -1,28 +1,30 @@
+
 //单击后选择的节点信息
 var selectedNode;
 var selectedNodePath;
-
 var zTreeObj;
 var setting = {
 	treeId:"tree",
 	view:{
+		addHoverDom: addHoverDom1,
+		removeHoverDom: removeHoverDom1,
 		fontCss : {
 			color : "#333"
 		}
 	},
 	callback: {
-		onClick: zTreeOnClick
+		onClick: zTreeOnClick,
 	}
 };
 // 树的节点
 var zNodes_head = [
 	{name : "2011-2015建设情况",year:"2011-2015",open : true,children : []},
 	{name : "年度建设情况",open : true,children : [
-		{name : "2011年度建设情况",open : true,year:"2011",children : []},
-		{name : "2012年度建设情况",open : true,year:"2012",children : []},
-		{name : "2013年度建设情况",open : true,year:"2013",children : []},
-		{name : "2014年度建设情况",open : true,year:"2014",children : []},
-		{name : "2015年度建设情况",open : true,year:"2015",children : []},
+		{name : "2011年度建设情况",open : false,year:"2011",children : []},
+		{name : "2012年度建设情况",open : false,year:"2012",children : []},
+		{name : "2013年度建设情况",open : false,year:"2013",children : []},
+		{name : "2014年度建设情况",open : false,year:"2014",children : []},
+		{name : "2015年度建设情况",open : false,year:"2015",children : []},
 	]}
 ];
 
@@ -58,22 +60,28 @@ function zTreeOnClick(e, treeId, treeNode) {
    selectedNodePath = treeNode.getPath();
    //做一个更换地图的操作
    if(treeNode.role == 'province'){
-	   $("#btn0").click();
+	  // $("#btn0").click();
+	   //btnsc(selectedNode);
    }
    if(treeNode.role == 'city'){
-	   $("#btn1").click();
+	   //$("#btn1").click();
+	   btnsc(selectedNode);
    }
    if(treeNode.role == 'county'){
-	   $("#btn2").click();
+	  // $("#btn2").click();
+	  // btnsc(selectedNode);
    }
    if(treeNode.role == 'namesec'){
-	   $("#btn2").click();
+	  // $("#btn2").click();
+	  // btnsc(selectedNode);
    }
    if(treeNode.role == 'town'){
-	   $("#btn2").click();
+	   //$("#btn2").click();
+	  // btnsc(selectedNode);
    }
    if(treeNode.role == 'village'){
-	   $("#btn2").click();
+	  // $("#btn2").click();
+	  // btnsc(selectedNode);
    }
    //..做一个更换地图的操作完毕
    //拿出levels和name，使用ajax去后台拿去数据
@@ -154,4 +162,23 @@ function showSelected(){
 		});
 	}
 }
+
+function addHoverDom1(treeId, treeNode) {
+	var aObj = $("#" + treeNode.tId + "_a");
+	if ($("#diyBtn_"+treeNode.id).length>0) return;
+	var editStr = "<span id='diyBtn_space_" +treeNode.id+ "' > </span>" + "<i class='layui-icon' id='diyBtn_" + treeNode.id + "'>&#xe615;</i>";
+	aObj.append(editStr);
+	var btn = $("#diyBtn_"+treeNode.id);
+	if (btn) {
+		btn.bind("click", function(){
+			setTimeout(function(){
+				showSelected();
+			},200);
+		});
+	}
+};
+function removeHoverDom1(treeId, treeNode) {
+	$("#diyBtn_"+treeNode.id).unbind().remove();
+	$("#diyBtn_space_" +treeNode.id).unbind().remove();
+};
 

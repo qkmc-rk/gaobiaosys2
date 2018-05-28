@@ -49,14 +49,14 @@
     select 
     <include refid="Base_Column_List" />
     from namesec
-    where CouName = #{currentNodeName,jdbcType=VARCHAR}
+    where CouName = #{currentNodeName,jdbcType=VARCHAR} order by NamSec asc
   </select>
   
   <select id="selectByProCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from namesec
-    where ProCode = #{procode,jdbcType=VARCHAR}
+    where ProCode = #{procode,jdbcType=VARCHAR} order by NamSec asc
   </select>
   
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >

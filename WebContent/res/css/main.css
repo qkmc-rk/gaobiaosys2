@@ -18,21 +18,34 @@
 	color: #4E5465;
 }
 #bav-1,#bav-2,#bav-3{
-	color: #555555;
+	color: #AF0000;
 }
+#bav-3:hover{
+	animation:colorchange 0.5s forwards;
+}
+#bav-2:hover{
+	animation:colorchange 0.5s forwards;
+}
+#bav-1:hover{
+	animation:colorchange 0.5s forwards;
+}
+@-webkit-keyframes colorchange{
+	from{color: #AF0000;}
+	to{ color: #ffffff;}
+}
+
 #nav-left-1 a,#nav-left-2{
-	color: #555555;
+	color: #fff;
 }
 .side-icon{
 	font-size: 18px;
 }
 .layui-side{
 	width: 220px;
-	top: 0;
+	top: 40px;
 	background-color: #eee;
-	z-index: 10001;
 	border-right: 1px solid #666666;
-	box-shadow: 0 1px 1px #2E2D3C;
+	box-shadow: 1px 1px 1px 1px #aaa;
 }
 body{
 	background-color: #F2F2F2;
@@ -47,7 +60,7 @@ body{
     top: 0;
     z-index: 1002;
     width: 220px;
-    height: 55px;
+    height: 25px;
     padding: 0 15px;
     box-sizing: border-box;
     font-weight: 300;
@@ -56,7 +69,8 @@ body{
 }
 .layui-logo{
 	text-align: center;
-	line-height: 55px;
+	line-height: 25px;
+	box-shadow: 0 4px 4px 0 #AAAAAA;
 }
 .layui-side-scroll {
     width: 220px;
@@ -85,11 +99,11 @@ body{
 font-size: 32px;
 }
 .layui-body{
-	top: 60px;
+	top: 0px;
 	left: 225px;
 }
 #gaobiao-tree{
-	margin-top: 55px;
+	margin-top: 10px;
 	width: 220px;
 }
 #i-hide{
