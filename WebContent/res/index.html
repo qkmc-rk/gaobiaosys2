@@ -66,79 +66,34 @@
 			</div>
 		</div>
 	
-	<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
-	<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
-	<script src="http://113.54.15.13/arcgis_js_v47_api/arcgis_js_api/library/4.7/dojo/dojo.js"></script>
-	<script src="js/jquery.ztree.core.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/jquery.ztree.exedit.js" type="text/javascript" charset="utf-8"></script>
-  	<script src="js/jquery.ztree.excheck.js" type="text/javascript" charset="utf-8"></script>
-  	<script src="js/jquery.ztree.exhide.js" type="text/javascript" charset="utf-8"></script>
-	<!--ztree的初始化-->
-	<script src="js/ztreeCreate.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/gisinit.js" type="text/javascript" charset="utf-8"></script>
-    <div id="selectedNode-info" style="display:none;width: 800px; height: 400px; background-color: #EEEEEE; margin: auto;">
-    	<div style="width: 100%; height: 50px; line-height: 50px; text-align: center;">
-    		<h2>高标准农田建设情况</h2>
-    	</div>
-    	<div class="layui-row">
-    		<table class="layui-table">
-			<colgroup>
-			    <col width="150">
-			    <col width="200">
-			    <col>
-			  </colgroup>
-			  <tbody>
-			    <tr>
-			      <td class="title">区域范围</td>
-			      <td id="area"></td>
-			      <td class="title">片区名称</td>
-			      <td id="namesec"></td>
-			    </tr>
-			    <tr>
-			      <td class="title">耕地面积(万亩)</td>
-			      <td id="FarmlandAr"></td>
-			      <td class="title">新建面积(亩)</td>
-			      <td id="newArea"></td>
-			    </tr>
-			    <tr>
-			      <td class="title">改造耕地面积(亩)</td>
-			      <td id="TrUpArea"></td>
-			      <td class="title">财政投资(万元)</td>
-			      <td id="CommFina"></td>
-			    </tr>
-			    <tr>
-			      <td colspan="1" class="title">主要建设内容</td>
-			      <td colspan="3">
-			      	<table class="layui-table">
-			      		<tr>
-				      		<td class="title">田型调整(亩)</td>
-				      		<td id="FieAdju"></td>
-				      		<td class="title">排灌渠(千米)</td>
-				      		<td id="IrriDra"></td>
-				      	</tr>
-				      	<tr>
-				      		<td class="title">机耕路(千米)</td>
-				      		<td id="TillWa"></td>
-				      		<td class="title">地力培肥(亩)</td>
-				      		<td id="FerFar"></td>
-				      	</tr>
-				      	<tr>
-				      		<td colspan="2" class="title">小型水利工程(座)</td>
-				      		<td colspan="2" id="FaWaCoPr"></td>
-				      	</tr>
-			      	</table>
-			      </td>
-			    </tr>
-			    <tr>
-			    	<td colspan="1" class="title">支撑项目</td>
-			    	<td colspan="3" id="SuppPro">
-			    	</td>
-			    </tr>
-			  </tbody>
-			</table>
-    	</div>
-    </div>
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://113.54.15.13/arcgis_js_v47_api/arcgis_js_api/library/4.7/dojo/dojo.js"></script>
+		<script src="js/jquery.ztree.core.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.ztree.exedit.js" type="text/javascript" charset="utf-8"></script>
+	  	<script src="js/jquery.ztree.excheck.js" type="text/javascript" charset="utf-8"></script>
+	  	<script src="js/jquery.ztree.exhide.js" type="text/javascript" charset="utf-8"></script>
+		<!--ztree的初始化-->
+		<script src="js/ztreeCreate.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/gisinit.js" type="text/javascript" charset="utf-8"></script>
+		<div id="selectedNode-info-outer">
+			<div id="selectedNode-info">
+		    	<p class="words" id="YearShow"></p>
+				<p class="words" id="Fanwei"></p>
+				<p class="words" id="NamSec"></p>
+				<p class="words" id="LeadInd"></p>
+				<p class="words" id="NewAreasum"></p>
+				<p class="words" id="TrUpAreasum"></p>
+				<p class="words" id="CommFinasum"></p>
+				<p class="words" id="FieAdjusum"></p>
+				<p class="words" id="IrriDrasum"></p>
+				<p class="words" id="TillWasum"></p>
+				<p class="words" id="FerFarsum"></p>
+				<p class="words" id="FaWaCoPrsum"></p>
+				<p class="words" id="SuppPro"></p>
+		    </div>
+		</div>
 	</body>
 </html>

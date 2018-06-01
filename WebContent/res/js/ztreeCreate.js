@@ -61,7 +61,7 @@ function zTreeOnClick(e, treeId, treeNode) {
    //做一个更换地图的操作
    if(treeNode.role == 'province'){
 	  // $("#btn0").click();
-	   //btnsc(selectedNode);
+	   btnsc(selectedNode);
    }
    if(treeNode.role == 'city'){
 	   //$("#btn1").click();
@@ -69,19 +69,19 @@ function zTreeOnClick(e, treeId, treeNode) {
    }
    if(treeNode.role == 'county'){
 	  // $("#btn2").click();
-	  // btnsc(selectedNode);
+	   btnsc(selectedNode);
    }
    if(treeNode.role == 'namesec'){
 	  // $("#btn2").click();
-	  // btnsc(selectedNode);
+	   btnsc(selectedNode);
    }
    if(treeNode.role == 'town'){
 	   //$("#btn2").click();
-	  // btnsc(selectedNode);
+	   btnsc(selectedNode);
    }
    if(treeNode.role == 'village'){
 	  // $("#btn2").click();
-	  // btnsc(selectedNode);
+	   btnsc(selectedNode);
    }
    //..做一个更换地图的操作完毕
    //拿出levels和name，使用ajax去后台拿去数据
@@ -131,26 +131,28 @@ function showSelected(){
 			}, function(str){
 				//设置div里面的值
 				str = JSON.parse(str);  //转换为对象
-				$('#SuppPro').text(str.supppro);
-				$('#area').text(str.proname + str.cityname + str.couname + str.townname + str.vilname);
-				$('#namesec').text(str.namsec);
-				$('#FarmlandAr').text(str.farmlandar);
-				$('#newArea').text(str.newarea);
-				$('#TrUpArea').text(str.truparea);
-				$('#CommFina').text(str.commfina);
-				$('#FieAdju').text(str.fieadju);
-				$('#IrriDra').text(str.irridra);
-				$('#TillWa').text(str.tillwa);
-				$('#FerFar').text(str.ferfar);
-				$('#FaWaCoPr').text(str.fawacopr);
+				$('#SuppPro').html(str.supppro);
+				$('#Fanwei').html(str.proname + str.cityname + str.couname + str.townname + str.vilname);
+				$('#NamSec').html(str.namsec);
+				$('#LeadInd').html(str.leadind);
+				$('#FarmlandAr').html(str.farmlandar);
+				$('#NewAreasum').html(str.newarea);
+				$('#TrUpAreasum').html(str.truparea);
+				$('#CommFinasum').html(str.commfina);
+				$('#FieAdjusum').html(str.fieadju);
+				$('#IrriDrasum').html(str.irridra);
+				$('#TillWasum').html(str.tillwa);
+				$('#FerFarsum').html(str.ferfar);
+				$('#FaWaCoPrsum').html(str.fawacopr);
 				//....设置div值完成
 				layui.use('layer', function(){
 				  var layer = layui.layer;
 				  layer.open({
 				  	    type: 1,
+				  	    resize:false,
 				  	    title:'查询结果',
-				  	    area:['800px','510px'],
-				  	    content: $('#selectedNode-info').html() //注意，如果str是object，那么需要字符拼接。
+				  	    area:['700px','380px'],
+				  	    content: $('#selectedNode-info-outer').html() //注意，如果str是object，那么需要字符拼接。
 				  	  });
 				});
 	  	});

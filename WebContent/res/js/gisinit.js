@@ -221,15 +221,46 @@ function btnsc(selectedNode) {
 			"esri/symbols/SimpleFillSymbol", "dojo/domReady!" ], function(
 			QueryTask, Query, SimpleFillSymbol) {
 		//var layerUrl = MapConfig.FEconomiclayerUrl+"/"+layerid;
+		//根据不同级别生成不同的查询区域，比如市，县，镇，片区等就不一样
+		//console.log("mrruan:");
+		//console.log(selectedNode);
+		var rk_layer;
+		var rk_rank = selectedNode.role;
+		if(rk_rank == 'city'){
+			rk_layer = '/6';
+		}else if(rk_rank == 'county'){
+			rk_layer = '/5';
+		}else if(rk_rank == 'namesec'){
+			rk_layer = '/3';
+		}else if(rk_rank == 'town'){
+			rk_layer = '/2';
+		}else if(rk_rank == 'village'){
+			rk_layer = '/1';
+		}else if(rk_rank == 'province'){
+			rk_layer = '/7';
+		}
 		var queryTask = new QueryTask({
-			url : soilURL + "/6"
+			url : soilURL + rk_layer
 		});
 		//查询条件
 		var name = selectedNode.name;
 		var query = new Query();
 		query.returnGeometry = true;
 		query.outFields = [ "*" ];
-		query.where = "CityName like '%" + name + "%'";
+		//不同的区域需要不同的where子句
+		if(rk_rank == 'city'){
+			query.where = "CityName like '%" + name + "%'";
+		}else if(rk_rank == 'county'){
+			query.where = "CouName like '%" + name + "%'";
+		}else if(rk_rank == 'namesec'){
+			query.where = "NameSec like '%" + name + "%'";
+		}else if(rk_rank == 'town'){
+			query.where = "TownName like '%" + name + "%'";
+		}else if(rk_rank == 'village'){
+			query.where = "VilName like '%" + name + "%'";
+		}else if(rk_rank == 'province'){
+			query.where = "ProName like '%" + name + "%'";
+		}
 
 		queryTask.execute(query).then(function(results) {
 			//debugger;

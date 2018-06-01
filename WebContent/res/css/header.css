@@ -6,7 +6,7 @@
 	height: 36px;
 	border: none;
 	box-shadow:0 4px 8px 0 rgba(0,0,0,.05);
-	background: linear-gradient(to bottom, #eee -10%,#888 50%);
+	background: linear-gradient(to bottom, #aaa 5%,#666 30%);
 }
 .nav-right{
 	float: right;
