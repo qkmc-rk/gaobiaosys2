@@ -14,4 +14,6 @@ public interface ProvinceMapper {
 	List<Province> selectByProCode(String procode);
 	
 	Province selectById(String OBJECTID_1);
+
+	Province selectByName(String proname);
 }

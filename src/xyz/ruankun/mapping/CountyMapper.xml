@@ -45,6 +45,13 @@
     where CouCode = #{coucode,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from county
+    where CouName = #{name} and CityName=#{parentName}
+  </select>
+  
   <select id="selectByProCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

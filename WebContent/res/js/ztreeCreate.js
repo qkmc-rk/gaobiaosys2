@@ -131,6 +131,31 @@ function showSelected(){
 			}, function(str){
 				//设置div里面的值
 				str = JSON.parse(str);  //转换为对象
+				
+				var path = selectedNodePath;
+				
+				console.log('xxxxxxxx');
+				console.log(path);
+				
+				if(path[0].name == '2011-2015建设情况'){
+					$('#YearShow').html('2011-2015');
+				}
+				if(path[1].name == '2011年度建设情况'){
+					$('#YearShow').html('2011');				
+				}
+				if(path[1].name == '2012年度建设情况'){
+					$('#YearShow').html('2012');
+				}
+				if(path[1].name == '2013年度建设情况'){
+					$('#YearShow').html('2013');
+				}
+				if(path[1].name == '2014年度建设情况'){
+					$('#YearShow').html('2014');
+				}
+				if(path[1].name == '2015年度建设情况'){
+					$('#YearShow').html('2015');
+				}
+				
 				$('#SuppPro').html(str.supppro);
 				$('#Fanwei').html(str.proname + str.cityname + str.couname + str.townname + str.vilname);
 				$('#NamSec').html(str.namsec);

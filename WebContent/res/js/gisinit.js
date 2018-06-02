@@ -69,9 +69,33 @@ require(
 								var layerName = result.layerName;
 								feature.attributes.layerName = layerName;
 								if (layerName === '省界') {
+									//这里获取数据并将数据显示在div中
+									var province = '四川省';
+									getTabProvinceInfo('',feature.attributes.ProName);
+									clearTabCityInfo();
+									clearTabCountyInfo();
+									clearTabNameSecInfo();
+									clearTabTownInfo();
+									clearTabVillageInfo();
+									//激活tab
+									activeProvince();
+									//获取数据延时
+									setTimeout(function(){
+										layui.use('layer', function(){
+										  var layer = layui.layer;
+										  layer.open({
+									  	    type: 1,
+									  	    resize:false,
+									  	    title:'省界',
+									  	    area:['700px','505px'],
+									  	    content: $('#tab-info-outer').html() //注意，如果str是object，那么需要字符拼接。
+									  	  });
+										});
+									},500);
+									//弹出数据
 									feature.popupTemplate = { // autocasts as new PopupTemplate()
 										title : "{省界_高标准农田}",
-										content : "<b>省界省:</b> {ProName}"
+										content :"<b>省界省:</b> {ProName}"
 												+ "<br><b>市:</b> {CityName}"
 												+ "<br><b>县:</b> {CouName}"
 												+ "<br><b>片区:</b> {NamSec}"
@@ -80,19 +104,63 @@ require(
 									};
 								}
 								if (layerName === '市州界') {
+									getTabProvinceInfo('',feature.attributes.ProName);
+									getTabCityInfo(feature.attributes.ProName,feature.attributes.CityName);
+									clearTabCountyInfo();
+									clearTabNameSecInfo();
+									clearTabTownInfo();
+									clearTabVillageInfo();
+									//激活tab
+									activeCity();
+									//获取数据延时
+									setTimeout(function(){
+										layui.use('layer', function(){
+										  var layer = layui.layer;
+										  layer.open({
+										  	    type: 1,
+										  	    resize:false,
+										  	    title:'市州界',
+										  	    area:['700px','505px'],
+										  	    content: $('#tab-info-outer').html() //注意，如果str是object，那么需要字符拼接。
+										  	  });
+										});
+									},500);
+									
 									feature.popupTemplate = { // autocasts as new PopupTemplate()
 										title : "{市州界_高标准农田}",
-										content : "<b>市州省:</b> {ProName}"
+										content :
+											 "<b>市州省:</b> {ProName}"
 												+ "<br><b>市:</b> {CityName}"
 												+ "<br><b>县:</b> {CouName}"
 												+ "<br><b>片区:</b> {NamSec}"
 												+ "<br><b>乡镇:</b> {TownName}"
 												+ "<br><b>村:</b> {VilName}"
 									};
-								} else if (layerName === '区县界') {
+								}else if(layerName === '区县界') {
+									getTabProvinceInfo('',feature.attributes.ProName);
+									getTabCityInfo(feature.attributes.ProName,feature.attributes.CityName);
+									getTabCountyInfo(feature.attributes.CityName,feature.attributes.CouName);
+									clearTabNameSecInfo();
+									clearTabTownInfo();
+									clearTabVillageInfo();
+									//激活tab
+									activeCounty();
+									//获取数据延时
+									setTimeout(function(){
+										layui.use('layer', function(){
+										  var layer = layui.layer;
+										  layer.open({
+										  	    type: 1,
+										  	    resize:false,
+										  	    title:'区县界',
+										  	    area:['700px','505px'],
+										  	    content: $('#tab-info-outer').html() //注意，如果str是object，那么需要字符拼接。
+										  	  });
+										});
+									},500);
 									feature.popupTemplate = { // autocasts as new PopupTemplate()
 										title : "{县区界_高标准农田}",
-										content : "<b>市州省:</b> {ProName}"
+										content :  "<b>市州省:</b> {ProName}"
 												+ "<br><b>市:</b> {CityName}"
 												+ "<br><b>县:</b> {CouName}"
 												+ "<br><b>片区:</b> {NamSec}"
@@ -100,6 +168,27 @@ require(
 												+ "<br><b>村:</b> {VilName}"
 									};
 								} else if (layerName === '片区界') {
+									getTabProvinceInfo('',feature.attributes.ProName);
+									getTabCityInfo(feature.attributes.ProName,feature.attributes.CityName);
+									getTabCountyInfo(feature.attributes.CityName,feature.attributes.CouName);
+									getTabNameSecInfo(feature.attributes.CouName,feature.attributes.NamSec);
+									clearTabTownInfo();
+									clearTabVillageInfo();
+									//激活tab
+									activeNameSec();
+									//获取数据延时
+									setTimeout(function(){
+										layui.use('layer', function(){
+										  var layer = layui.layer;
+										  layer.open({
+										  	    type: 1,
+										  	    resize:false,
+										  	    title:'片区界',
+										  	    area:['700px','505px'],
+										  	    content: $('#tab-info-outer').html() //注意，如果str是object，那么需要字符拼接。
+										  	  });
+										});
+									},500);
 									feature.popupTemplate = { // autocasts as new PopupTemplate()
 										title : "{片区界_高标准农田}",
 										content : "<b>市州省:</b> {ProName}"
@@ -110,6 +199,27 @@ require(
 												+ "<br><b>村:</b> {VilName}"
 									};
 								} else if (layerName === '乡镇界') {
+									getTabProvinceInfo('',feature.attributes.ProName);
+									getTabCityInfo(feature.attributes.ProName,feature.attributes.CityName);
+									getTabCountyInfo(feature.attributes.CityName,feature.attributes.CouName);
+									getTabNameSecInfo(feature.attributes.CouName,feature.attributes.NamSec);
+									getTabTownInfo(feature.attributes.NamSec,feature.attributes.TownName);
+									clearTabVillageInfo();
+									//激活tab
+									activeTown();
+									//获取数据延时
+									setTimeout(function(){
+										layui.use('layer', function(){
+										  var layer = layui.layer;
+										  layer.open({
+										  	    type: 1,
+										  	    resize:false,
+										  	    title:'乡镇界',
+										  	    area:['700px','505px'],
+										  	    content: $('#tab-info-outer').html() //注意，如果str是object，那么需要字符拼接。
+										  	  });
+										});
+									},500);
 									feature.popupTemplate = { // autocasts as new PopupTemplate()
 										title : "{乡镇界_高标准农田}",
 										content : "<b>市州省:</b> {ProName}"
@@ -120,6 +230,27 @@ require(
 												+ "<br><b>村:</b> {VilName}"
 									};
 								} else if (layerName === '村界') {
+									getTabProvinceInfo('',feature.attributes.ProName);
+									getTabCityInfo(feature.attributes.ProName,feature.attributes.CityName);
+									getTabCountyInfo(feature.attributes.CityName,feature.attributes.CouName);
+									getTabNameSecInfo(feature.attributes.CouName,feature.attributes.NamSec);
+									getTabTownInfo(feature.attributes.NamSec,feature.attributes.TownName);
+									getTabVillageInfo(feature.attributes.TownName,feature.attributes.VilName);
+									//激活tab
+									activeVillage();
+									//获取数据延时
+									setTimeout(function(){
+										layui.use('layer', function(){
+										  var layer = layui.layer;
+										  layer.open({
+									  	    type: 1,
+									  	    resize:false,
+									  	    title:'村界',
+									  	    area:['700px','505px'],
+									  	    content: $('#tab-info-outer').html() //注意，如果str是object，那么需要字符拼接。
+									  	  });
+										});
+									},500);
 									feature.popupTemplate = { // autocasts as new PopupTemplate()
 										title : "{村界_高标准农田}",
 										content : "<b>市州省:</b> {ProName}"
@@ -144,12 +275,12 @@ require(
 
 				// Shows the results of the Identify in a popup once the promise is resolved
 				function showPopup(response) {
-					if (response.length > 0) {
+					/*if (response.length > 0) {
 						view.popup.open({
 							features : response,
 							location : event.mapPoint
 						});
-					}
+					}*/
 					dom.byId("viewDiv").style.cursor = "auto";
 				}
 			}

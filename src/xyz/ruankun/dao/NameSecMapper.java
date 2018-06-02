@@ -16,4 +16,6 @@ public interface NameSecMapper {
 	List<NameSec> selectByCountyName(String currentNodeName);
 	
 	NameSec selectById(String OBJECTID);
+
+	NameSec selectByName(String name);
 }

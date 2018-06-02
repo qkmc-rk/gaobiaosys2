@@ -2,6 +2,8 @@ package xyz.ruankun.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import xyz.ruankun.model.Village;
 
 public interface VillageMapper {
@@ -16,4 +18,6 @@ public interface VillageMapper {
 	List<Village> selectByTownName(String currentNodeName);
 	
 	Village selectById(String OBJECTID);
+
+	Village selectByName(@Param("parentName") String parentName,@Param("name") String name);
 }

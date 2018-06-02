@@ -54,4 +54,25 @@ public class UserController {
 		return rs;
 	}
 	
+	/**
+	 * validate if the user is loggined .
+	 * @param sessionKey
+	 * @return
+	 */
+	@RequestMapping(value="/online",method=RequestMethod.POST)
+	@ResponseBody
+	public String logined(@RequestParam String sessionKey,HttpSession session) {
+		//get user first
+		UserSession userSession = (UserSession)session.getAttribute("user");
+		//if user is null throw exception
+		if(userSession == null) {
+			return LoginReturn.jsonFail("timeout..please retry!");
+		}
+		//if the sessionid is changed by user itself.
+		if(userSession != null && !userSession.getSessionId().equals(sessionKey)) {
+			return LoginReturn.jsonFail("wrong sessionid");
+		}
+		return LoginReturn.jsonSuccess("ÔÚÏß");
+	}
+	
 }

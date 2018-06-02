@@ -19,4 +19,13 @@ public interface TreeService {
 	String getChildren(String OBJECTID,String role);
 
 	String getNodeInfo(String oBJECTID, String role);
+
+	/**
+	 * get info of the selectednode,you must know its name and role.
+	 * @param name  the district's parent's name.
+	 * @param name  the district name.
+	 * @param role the rank of the district.
+	 * @return the json info of your selected node info.
+	 */
+	String getNodeInfoByName(String parentName,String name, String role);
 }

@@ -6,6 +6,7 @@
 		
 		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
 		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="css/tab.css"/>
 		
 		<link rel="stylesheet" type="text/css" href="css/zTreeStyle/zTreeStyle.css"/>
 		<link rel="stylesheet" type="text/css" href="css/metroStyle/metroStyle.css"/>
@@ -94,6 +95,118 @@
 				<p class="words" id="FaWaCoPrsum"></p>
 				<p class="words" id="SuppPro"></p>
 		    </div>
+		</div>
+		
+		<div class="tab-hidden" id="tab-info-outer">
+			<div class="tab-info">
+				<div class="layui-tab">
+				  <ul class="layui-tab-title">
+				    <li id="tab-province-li" class="layui-this">省</li>
+				    <li id="tab-city-li">市</li>
+				    <li id="tab-county-li">县</li>
+				    <li id="tab-namesec-li">片区</li>
+				    <li id="tab-town-li">乡镇</li>
+				    <li id="tab-village-li">村</li>
+				  </ul>
+				  <div class="layui-tab-content">
+				    <div class="layui-tab-item layui-show" id="tab-province">
+				    	<p class="words2 tab-YearShow" id="province-YearShow"></p>
+						<p class="words2 tab-Fanwei" id="province-Fanwei"></p>
+						<p class="words2 tab-NamSec" id="province-NamSec"></p>
+						<p class="words2 tab-LeadInd" id="province-LeadInd"></p>
+						<p class="words2 tab-NewAreasum" id="province-NewAreasum"></p>
+						<p class="words2 tab-TrUpAreasum" id="province-TrUpAreasum"></p>
+						<p class="words2 tab-CommFinasum" id="province-CommFinasum"></p>
+						<p class="words2 tab-FieAdjusum" id="province-FieAdjusum"></p>
+						<p class="words2 tab-IrriDrasum" id="province-IrriDrasum"></p>
+						<p class="words2 tab-TillWasum" id="province-TillWasum"></p>
+						<p class="words2 tab-FerFarsum" id="province-FerFarsum"></p>
+						<p class="words2 tab-FaWaCoPrsum" id="province-FaWaCoPrsum"></p>
+						<p class="words2 tab-SuppPro" id="province-SuppPro"></p>
+				    </div>
+				    <div class="layui-tab-item" id="tab-city">
+				    	<p class="words2 tab-YearShow" id="city-YearShow"></p>
+						<p class="words2 tab-Fanwei" id="city-Fanwei"></p>
+						<p class="words2 tab-NamSec" id="city-NamSec"></p>
+						<p class="words2 tab-LeadInd" id="city-LeadInd"></p>
+						<p class="words2 tab-NewAreasum" id="city-NewAreasum"></p>
+						<p class="words2 tab-TrUpAreasum" id="city-TrUpAreasum"></p>
+						<p class="words2 tab-CommFinasum" id="city-CommFinasum"></p>
+						<p class="words2 tab-FieAdjusum" id="city-FieAdjusum"></p>
+						<p class="words2 tab-IrriDrasum" id="city-IrriDrasum"></p>
+						<p class="words2 tab-TillWasum" id="city-TillWasum"></p>
+						<p class="words2 tab-FerFarsum" id="city-FerFarsum"></p>
+						<p class="words2 tab-FaWaCoPrsum" id="city-FaWaCoPrsum"></p>
+						<p class="words2 tab-SuppPro" id="city-SuppPro"></p>
+				    </div>
+				    <div class="layui-tab-item" id="tab-county">
+				    	<p class="words2 tab-YearShow" id="county-YearShow"></p>
+						<p class="words2 tab-Fanwei" id="county-Fanwei"></p>
+						<p class="words2 tab-NamSec" id="county-NamSec"></p>
+						<p class="words2 tab-LeadInd" id="county-LeadInd"></p>
+						<p class="words2 tab-NewAreasum" id="county-NewAreasum"></p>
+						<p class="words2 tab-TrUpAreasum" id="county-TrUpAreasum"></p>
+						<p class="words2 tab-CommFinasum" id="county-CommFinasum"></p>
+						<p class="words2 tab-FieAdjusum" id="county-FieAdjusum"></p>
+						<p class="words2 tab-IrriDrasum" id="county-IrriDrasum"></p>
+						<p class="words2 tab-TillWasum" id="county-TillWasum"></p>
+						<p class="words2 tab-FerFarsum" id="county-FerFarsum"></p>
+						<p class="words2 tab-FaWaCoPrsum" id="county-FaWaCoPrsum"></p>
+						<p class="words2 tab-SuppPro" id="county-SuppPro"></p>
+				    </div>
+				    <div class="layui-tab-item" id="tab-namesec">
+				    	<p class="words2 tab-YearShow" id="namesec-YearShow"></p>
+						<p class="words2 tab-Fanwei" id="namesec-Fanwei"></p>
+						<p class="words2 tab-NamSec" id="namesec-NamSec"></p>
+						<p class="words2 tab-LeadInd" id="namesec-LeadInd"></p>
+						<p class="words2 tab-NewAreasum" id="namesec-NewAreasum"></p>
+						<p class="words2 tab-TrUpAreasum" id="namesec-TrUpAreasum"></p>
+						<p class="words2 tab-CommFinasum" id="namesec-CommFinasum"></p>
+						<p class="words2 tab-FieAdjusum" id="namesec-FieAdjusum"></p>
+						<p class="words2 tab-IrriDrasum" id="namesec-IrriDrasum"></p>
+						<p class="words2 tab-TillWasum" id="namesec-TillWasum"></p>
+						<p class="words2 tab-FerFarsum" id="namesec-FerFarsum"></p>
+						<p class="words2 tab-FaWaCoPrsum" id="namesec-FaWaCoPrsum"></p>
+						<p class="words2 tab-SuppPro" id="namesec-SuppPro"></p>
+				    </div>
+				    <div class="layui-tab-item" id="tab-town">
+				    	<p class="words2 tab-YearShow" id="town-YearShow"></p>
+						<p class="words2 tab-Fanwei" id="town-Fanwei"></p>
+						<p class="words2 tab-NamSec" id="town-NamSec"></p>
+						<p class="words2 tab-LeadInd" id="town-LeadInd"></p>
+						<p class="words2 tab-NewAreasum" id="town-NewAreasum"></p>
+						<p class="words2 tab-TrUpAreasum" id="town-TrUpAreasum"></p>
+						<p class="words2 tab-CommFinasum" id="town-CommFinasum"></p>
+						<p class="words2 tab-FieAdjusum" id="town-FieAdjusum"></p>
+						<p class="words2 tab-IrriDrasum" id="town-IrriDrasum"></p>
+						<p class="words2 tab-TillWasum" id="town-TillWasum"></p>
+						<p class="words2 tab-FerFarsum" id="town-FerFarsum"></p>
+						<p class="words2 tab-FaWaCoPrsum" id="town-FaWaCoPrsum"></p>
+						<p class="words2 tab-SuppPro" id="town-SuppPro"></p>
+				    </div>
+				    <div class="layui-tab-item" id="tab-village">
+				    	<p class="words2 tab-YearShow" id="village-YearShow"></p>
+						<p class="words2 tab-Fanwei" id="village-Fanwei"></p>
+						<p class="words2 tab-NamSec" id="village-NamSec"></p>
+						<p class="words2 tab-LeadInd" id="village-LeadInd"></p>
+						<p class="words2 tab-NewAreasum" id="village-NewAreasum"></p>
+						<p class="words2 tab-TrUpAreasum" id="village-TrUpAreasum"></p>
+						<p class="words2 tab-CommFinasum" id="village-CommFinasum"></p>
+						<p class="words2 tab-FieAdjusum" id="village-FieAdjusum"></p>
+						<p class="words2 tab-IrriDrasum" id="village-IrriDrasum"></p>
+						<p class="words2 tab-TillWasum" id="village-TillWasum"></p>
+						<p class="words2 tab-FerFarsum" id="village-FerFarsum"></p>
+						<p class="words2 tab-FaWaCoPrsum" id="village-FaWaCoPrsum"></p>
+						<p class="words2 tab-SuppPro" id="village-SuppPro"></p>
+				    </div>
+				  </div>
+				</div>
+				<script>
+				layui.use('element', function(){
+				  var element = layui.element;
+				});
+				</script>
+			</div>
 		</div>
 	</body>
 </html>

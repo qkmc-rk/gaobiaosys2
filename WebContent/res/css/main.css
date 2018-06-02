@@ -244,3 +244,10 @@ body .layui-tree-skin-customThem .layui-tree-branch{color: #EDCA50;}
 	left: 128px;
 	text-align: left;
 }
+
+.rk-hidden{
+	display:none !important;
+}
+.rk-small-font{
+	font-size:10px !important;
+}

@@ -66,6 +66,13 @@
     where ProCode = #{procode,jdbcType=VARCHAR}  order by VilCode asc
   </select>
   
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from village
+    where VilName = #{name} and TownName=#{parentName}
+  </select>
+  
   <insert id="insert" parameterType="xyz.ruankun.model.Village" >
     insert into village (OBJECTID, ProName, ProCode, 
       CityName, CityCode, CouName, 

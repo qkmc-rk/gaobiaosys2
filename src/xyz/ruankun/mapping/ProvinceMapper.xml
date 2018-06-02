@@ -58,6 +58,13 @@
     where ProCode = #{procode,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from province
+    where ProName = #{proname,jdbcType=VARCHAR}
+  </select>
+  
   <insert id="insert" parameterType="xyz.ruankun.model.Province" >
     insert into province (OBJECTID_1, ProName, ProCode, 
       CityName, CityCode, CouName, 

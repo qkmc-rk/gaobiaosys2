@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -114,5 +115,29 @@ public class TreeController {
 			dNode.setCustom("Didn't get the nodes info");
 			return JSON.toJSONString(dNode);
 		}
+	}
+	
+	@RequestMapping(value="/infobyname",method=RequestMethod.GET)
+	@ResponseBody
+	public String infobyNameAndRole(@RequestParam String parentName,
+			@RequestParam String name,
+			@RequestParam String role,
+			@RequestParam String sessionKey,
+			HttpSession session) {
+		//get user first
+		UserSession userSession = (UserSession)session.getAttribute("user");
+		//if user is null throw exception
+		if(userSession == null) {
+			return LoginReturn.jsonFail("timeout..please retry!");
+		}
+		//if the sessionid is changed by user itself.
+		if(userSession != null && !userSession.getSessionId().equals(sessionKey)) {
+			return LoginReturn.jsonFail("wrong sessionid");
+		}
+		//data validate
+		if(parentName == null || name == null || role == null) return null;
+		//then find info by name and role
+		String rs = treeService.getNodeInfoByName(parentName,name,role);
+		return rs;
 	}
 }

@@ -266,9 +266,11 @@ public class TreeServiceImpl implements TreeService {
 			cityChildren = cityMapper.selectByProCode(province.getProcode());
 			children = new ArrayList<>();
 			for(City c: cityChildren) {
-				deepNode = new DeepNode<>();
-				deepNode.setAll(c, null, null);
-				children.add(deepNode);
+				if(!c.getYesno().equals("·ñ")) {
+					deepNode = new DeepNode<>();
+					deepNode.setAll(c, null, null);
+					children.add(deepNode);	
+				}
 			}
 			return JSON.toJSONString(children);
 		case "city":
@@ -276,9 +278,11 @@ public class TreeServiceImpl implements TreeService {
 			countyChildren = countyMapper.selectByCityName(city.getCityname());
 			children = new ArrayList<>();
 			for(County c: countyChildren) {
-				deepNode = new DeepNode<>();
-				deepNode.setAll(c, null, null);
-				children.add(deepNode);
+				if(!c.getYesno().equals("·ñ")) {
+					deepNode = new DeepNode<>();
+					deepNode.setAll(c, null, null);
+					children.add(deepNode);
+				}
 			}
 			return JSON.toJSONString(children);
 		case "county":
@@ -286,9 +290,11 @@ public class TreeServiceImpl implements TreeService {
 			nameSecChildren = nameSecMapper.selectByCountyName(county.getCouname());
 			children = new ArrayList<>();
 			for(NameSec nc: nameSecChildren) {
-				deepNode = new DeepNode<>();
-				deepNode.setAll(nc, null, null);
-				children.add(deepNode);
+				if(!nc.getYesno().equals("·ñ")) {
+					deepNode = new DeepNode<>();
+					deepNode.setAll(nc, null, null);
+					children.add(deepNode);
+				}
 			}
 			return JSON.toJSONString(children);
 		case "namesec":
@@ -296,9 +302,11 @@ public class TreeServiceImpl implements TreeService {
 			townChildren = townMapper.selectByNameSec(namesec.getNamsec());
 			children = new ArrayList<>();
 			for(Town t: townChildren) {
-				deepNode = new DeepNode<>();
-				deepNode.setAll(t, null, null);
-				children.add(deepNode);
+				if(!t.getYesno().equals("·ñ")) {
+					deepNode = new DeepNode<>();
+					deepNode.setAll(t, null, null);
+					children.add(deepNode);
+				}
 			}
 			return JSON.toJSONString(children);
 		case "town":
@@ -306,9 +314,11 @@ public class TreeServiceImpl implements TreeService {
 			villageChildren = villageMapper.selectByTownName(town.getTownname());
 			children = new ArrayList<>();
 			for(Village v: villageChildren) {
-				deepNode = new DeepNode<>();
-				deepNode.setAll(v, null, null);
-				children.add(deepNode);
+				if(!v.getYesno().equals("·ñ")) {
+					deepNode = new DeepNode<>();
+					deepNode.setAll(v, null, null);
+					children.add(deepNode);
+				}
 			}
 			return JSON.toJSONString(children);
 		case "village":
@@ -544,5 +554,66 @@ public class TreeServiceImpl implements TreeService {
 		return null;
 	}
 	 */
+
+	@Override
+	public String getNodeInfoByName(String parentName,String name, String role) {
+		Province province = null;
+		City city = null;
+		County county = null;
+		NameSec namesec = null;
+		Town town = null;
+		Village village = null;
+		if(role.equals("province")) {
+			try {
+				province = provinceMapper.selectByName(name);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			return JSON.toJSONString(province);
+		}else if(role.equals("city")) {
+			try {
+				city = cityMapper.selectByName(parentName,name);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			return JSON.toJSONString(city);
+		}else if(role.equals("county")) {
+			try {
+				county = countyMapper.selectByName(parentName,name);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			return JSON.toJSONString(county);
+		}else if(role.equals("namesec")) {
+			try {
+				namesec = nameSecMapper.selectByCode(name);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			return JSON.toJSONString(namesec);
+		}else if(role.equals("town")) {
+			try {
+				town = townMapper.selectByName(parentName,name);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			return JSON.toJSONString(town);
+		}else if(role.equals("village")) {
+			try {
+				village = villageMapper.selectByName(parentName,name);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			return JSON.toJSONString(village);
+		}
+		return null;
+	}
 
 }
