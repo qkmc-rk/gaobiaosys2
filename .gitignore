@@ -1,12 +1,6 @@
 .project
 .DS_Store
 .classpath
-
-
-
 build
-
 .settings
-
-
-
+*.class
