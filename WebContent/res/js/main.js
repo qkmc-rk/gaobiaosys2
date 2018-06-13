@@ -3,7 +3,7 @@ var global_node;
 //用于隐藏侧面导航栏
 function sidebarevent(){
 	if($('#side').width() > 100){
-		$('#side').animate({width:'50px'});
+		$('#side').animate({width:'1px'});
 		$('.layui-logo').animate({width:'50px'});
 		$('#logo-title').hide();
 		$('#i-hide').hide();

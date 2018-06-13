@@ -170,6 +170,7 @@ body .layui-tree-skin-customThem .layui-tree-branch{color: #EDCA50;}
 	height: 20px;
 	top: 66px;
 	left: 130px;
+	font-size:11px;
 }
 #NamSec{
 	width:167px;
@@ -237,12 +238,13 @@ body .layui-tree-skin-customThem .layui-tree-branch{color: #EDCA50;}
 	left: 232px;
 }
 #SuppPro{
-	width:460px;
+	width:544px;
 	height: 56px;
 	line-height: 20px;
 	top: 238px;
 	left: 128px;
 	text-align: left;
+	overflow-x:auto;
 }
 
 .rk-hidden{

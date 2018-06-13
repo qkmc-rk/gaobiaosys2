@@ -74,6 +74,7 @@ public class TreeController {
 			@RequestParam String sessionKey,
 			@RequestParam String role) {
 		//get user first
+		System.out.println("children");
 		UserSession userSession = (UserSession)session.getAttribute("user");
 		//if user is null throw exception
 		if(userSession == null) {
