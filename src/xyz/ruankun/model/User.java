@@ -100,4 +100,11 @@ public class User {
     public void setNamesec(String namesec) {
         this.namesec = namesec == null ? null : namesec.trim();
     }
+
+	@Override
+	public String toString() {
+		return "User [objectid=" + objectid + ", account=" + account + ", password=" + password + ", procode=" + procode
+				+ ", citycode=" + citycode + ", coucode=" + coucode + ", towncode=" + towncode + ", vilcode=" + vilcode
+				+ ", level=" + level + ", namesec=" + namesec + "]";
+	}
 }

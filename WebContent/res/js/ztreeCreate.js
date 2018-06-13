@@ -55,37 +55,45 @@ $(document).ready(function() {
 });
 
 function zTreeOnClick(e, treeId, treeNode) {
+	console.log("zTreeOnClick");
    console.log(treeNode);
    selectedNode = treeNode;
    selectedNodePath = treeNode.getPath();
    //做一个更换地图的操作
    if(treeNode.role == 'province'){
 	  // $("#btn0").click();
+	   console.log("treeNode.role == 'province'");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'city'){
 	   //$("#btn1").click();
+	   console.log("treeNode.role == 'city'");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'county'){
 	  // $("#btn2").click();
+	   console.log("treeNode.role == 'county'");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'namesec'){
 	  // $("#btn2").click();
+	   console.log("treeNode.role == 'namesec'");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'town'){
 	   //$("#btn2").click();
+	   console.log("treeNode.role == 'town'");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'village'){
 	  // $("#btn2").click();
+	   console.log("treeNode.role == 'village'");
 	   btnsc(selectedNode);
    }
    //..做一个更换地图的操作完毕
    //拿出levels和name，使用ajax去后台拿去数据
    var OBJECTID = treeNode.id;
+   console.log('当前节点OBJECTID' + OBJECTID);
    if(OBJECTID == undefined)
 	   return;
    var role = treeNode.role;
@@ -101,7 +109,7 @@ function zTreeOnClick(e, treeId, treeNode) {
        async:'false',
        success:function (data) {
     	   //将取得的数据放置到
-    	   
+    	   console.log("获取当前节点子节点");
     	   console.log(data);
     	   var treeObj = $.fn.zTree.getZTreeObj("gaobiao-tree");
     	   //首先移除子节点

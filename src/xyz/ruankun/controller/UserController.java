@@ -37,6 +37,7 @@ public class UserController {
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	@ResponseBody
 	public String login(@RequestParam String account,@RequestParam String password,HttpSession session) {
+		System.out.println("[µÇÂ¼ DEBUG]account:" + account + "password:" + password);
 		//1.½øÐÐµÇÂ¼
 		User user = userService.login(account, password);
 		if(user == null) {

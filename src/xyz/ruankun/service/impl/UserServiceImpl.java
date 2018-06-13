@@ -24,11 +24,14 @@ public class UserServiceImpl implements UserService {
 		User user = null;
 		try {
 			user = userMapper.selectByAccount(account);
+			System.out.println("账号为:" + account + "已查找到用户:" + user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if(user!= null) {
+			System.out.println("用户不为空");
 			if(user.getPassword().equals(password)) {
+				System.out.println("密码为" + password + "登录成功！");
 				//登录成功
 				return user;
 			}else {
