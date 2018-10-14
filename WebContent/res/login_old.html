@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>四川省高标准农田建设管理信息系统 - 登录</title>
+		<style type="text/css">
+			.bg{
+				width: 1336px; margin: auto;
+			}
+			.bg-pic{
+				width: 100%; height: 100%;
+			}
+			.account{
+				width: 225px; 
+				height: 31px; 
+				position: absolute;
+				margin-top: -365px;
+				margin-left: 878px;
+			}
+			.account input{
+				width: 100%;
+				height: 94%;
+				border: none;
+			}
+			.password{
+				width: 225px; 
+				height: 31px; 
+				position: absolute;
+				margin-top: -303px;
+				margin-left: 878px;
+				background-color: red;
+			}
+			.password input{
+				width: 100%;
+				height: 94%;
+				border: none;
+			}
+			.submit{
+				width: 157px; 
+				height: 35px; 
+				position: absolute;
+				margin-top: -206px;
+				margin-left: 876px;
+				border-radius: 5px;
+			}
+			.submit input{
+				font-size: 24px;
+				width: 100%;
+				height: 100%;
+				line-height: 100%;
+				color: #FFF;
+				border-radius:5px;
+				cursor: pointer;
+				background-image: repeating-linear-gradient(rgb(170,221,148),rgb(118,198,73));
+				
+			}
+		</style>
+		<script type="text/javascript"  src="layui/layui.js" charset="utf-8"></script>
+		<script src="js/jquery-2.1.0.js"></script>
+		<script src="js/login.js"></script>
+	</head>
+	<body>
+		<div class="bg">
+			<img src="img/bg.jpg" class="bg-pic"/>
+			<div class="account"> 
+				<input type="text" name="account" id="account" value="" />
+			</div>
+			<div class="password" > 
+				<input type="password" name="password" id="password" value="" />
+			</div>
+			<div class="submit" > 
+				<input type="button" name="submit" id="loginbtn" onclick="ajaxLogin()" value="确认" />
+			</div>
+		</div>
+	</body>
+</html>
