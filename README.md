@@ -2,4 +2,6 @@
 gaobiao
 
 # 2018-06-13
-- 修改内容-gitignore 平台内容统一
+- 锟睫革拷锟斤拷锟斤拷-gitignore 平台锟斤拷锟斤拷统一
+
+revise at 18.10.13
