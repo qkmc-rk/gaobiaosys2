@@ -1,5 +1,6 @@
 var soilURL;
 var view;
+
 require([ "esri/config" ], function(esriConfig) {
 	esriConfig.request.corsEnabledServers.push("113.54.15.13");
 });
@@ -17,7 +18,8 @@ require(
 			var identifyTask, params;
 
 			// URL to the map service where the identify will be performed
-			soilURL = "http://113.54.15.13:6080/arcgis/rest/services/test/gaobiaoalltest/MapServer";
+			var districtCode = window.sessionStorage.getItem('districtCode');
+			soilURL = "http://113.54.15.13:6080/arcgis/rest/services/test/"+ districtCode + "/MapServer";
 
 			// Add the map service as a TileLayer for fast rendering
 			// Tile layers are composed of non-interactive images. For that
@@ -339,17 +341,30 @@ require(
 				}
 			}
 			// 搜索开始
+			//rk 在localsession中添加的districtCode，出处：ztreeCreate四十行左右 for next 图层使用
+			console.log("[日志-gisinit.js第345行]"+ window.sessionStorage.getItem('districtCode'));
+			var districtCode = window.sessionStorage.getItem('districtCode');
 			var searchWidget = new Search(
 					{
 						view : view,
 						// allPlaceholder: "District or Senator",
 						sources : [ {
 							featureLayer : {
-								url : "http://113.54.15.13:6080/arcgis/rest/services/test/gaobiaotest2011/MapServer/6",
+								url : "http://113.54.15.13:6080/arcgis/rest/services/test/" + districtCode  +"/MapServer/5",
 								popupTemplate : { // autocasts as new
 									// PopupTemplate()
+									//注释掉刘老师的内容
 									title : "Congressional District {CouName} </br>{CouName}, {CouName}",
-									overwriteActions : true
+									//overwriteActions : true,
+//									add by rk 这里的内容可以作为一个函数来使用，搜索时调用函数弹出显示信息层.
+									content:function(){
+										//alert("查询的弹出层应该在gisinit 359行代码处添加！{CouName}");
+										//这里的selectedNode是直接调用的ztreeCreate中生成的！
+										console.log("日志-gisinit.js第364行：" + JSON.stringify(selectedNode));
+										showSelected(selectedNode);
+										var CouName = "{CouName}";
+										
+									}
 								}
 							},
 							searchFields : [ "CouName" ],
@@ -373,6 +388,10 @@ require(
 
 						} ]
 					});
+			//测试获取搜索内容
+			searchWidget.on("select-result", function(event){
+  				console.log("测试：" + event.result.name);
+			});
 			// Add the search widget to the top left corner of the view
 			view.ui.add(searchWidget, {
 				position : "top-right"

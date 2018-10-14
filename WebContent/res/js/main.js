@@ -10,7 +10,7 @@ function sidebarevent(){
 		$('#i-show').show();
 		$('#i-logo').show();
 		$('#gaobiao-tree').hide();
-		$('#content-body').animate({left:'55px'});
+		$('#content-body').animate({left:'0px'});
 		$('.gaobiao-scroll').animate({width:'50px'});
 	}else{
 		$('#side').animate({width:'220px'});
@@ -310,6 +310,7 @@ function activeProvince(){
 	$('#tab-namesec-li').addClass('rk-hidden');
 	$('#tab-town-li').addClass('rk-hidden');
 	$('#tab-village-li').addClass('rk-hidden');
+
 }
 function activeCity(){
 	$('#tab-province-li').removeClass('layui-this');
@@ -333,6 +334,7 @@ function activeCity(){
 	$('#tab-namesec-li').addClass('rk-hidden');
 	$('#tab-town-li').addClass('rk-hidden');
 	$('#tab-village-li').addClass('rk-hidden');
+
 }
 function activeCounty(){
 	$('#tab-province-li').removeClass('layui-this');
@@ -356,6 +358,7 @@ function activeCounty(){
 	$('#tab-namesec-li').addClass('rk-hidden');
 	$('#tab-town-li').addClass('rk-hidden');
 	$('#tab-village-li').addClass('rk-hidden');
+
 }
 function activeNameSec(){
 	$('#tab-province-li').removeClass('layui-this');
@@ -379,7 +382,7 @@ function activeNameSec(){
 	$('#tab-namesec-li').removeClass('rk-hidden');
 	$('#tab-town-li').addClass('rk-hidden');
 	$('#tab-village-li').addClass('rk-hidden');
-	
+
 }
 
 function activeTown(){
@@ -405,6 +408,7 @@ function activeTown(){
 	$('#tab-town-li').removeClass('rk-hidden');
 	$('#tab-village-li').addClass('rk-hidden');
 	
+
 }
 function activeVillage(){
 	$('#tab-province-li').removeClass('layui-this');
@@ -428,8 +432,31 @@ function activeVillage(){
 	$('#tab-namesec-li').removeClass('rk-hidden');
 	$('#tab-town-li').removeClass('rk-hidden');
 	$('#tab-village-li').removeClass('rk-hidden');
+	
 }
 
-
+//在用户登录后添加永久性隐藏到比它权限高的tab，这个tab是点击地图时候显示的tab.
+//比如县级用户登录，那么他永远也看不到省级和市级的数据！
+$(document).ready(function(){
+	var role = window.sessionStorage.getItem('role');
+	if(role != 'province'){
+		$('#tab-province-li').addClass('permanently-hidden');
+	}
+	if(role != 'province' && role != 'city'){
+		$('#tab-province-li').addClass('permanently-hidden');
+		$('#tab-city-li').addClass('permanently-hidden');
+	}
+	if(role != 'province' && role != 'city' && role != 'namesec'){
+		$('#tab-province-li').addClass('permanently-hidden');
+		$('#tab-city-li').addClass('permanently-hidden');
+		$('#tab-namesec-li').addClass('permanently-hidden');
+	}
+	if(role != 'province' && role != 'city' && role != 'namesec' && role != 'town'){
+		$('#tab-province-li').addClass('permanently-hidden');
+		$('#tab-city-li').addClass('permanently-hidden');
+		$('#tab-namesec-li').addClass('permanently-hidden');
+		$('#tab-town-li').addClass('permanently-hidden');
+	}
+});
 
 

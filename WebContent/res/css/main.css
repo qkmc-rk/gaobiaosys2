@@ -147,7 +147,7 @@ body .layui-tree-skin-customThem .layui-tree-branch{color: #EDCA50;}
 	background-size: 100% 100%;
 }
 
-/*ÎÄ×Ö*/
+/*ï¿½ï¿½ï¿½ï¿½*/
 .words{
 	position: absolute;
 	/*border: 1px solid #000000;*/
@@ -162,7 +162,7 @@ body .layui-tree-skin-customThem .layui-tree-branch{color: #EDCA50;}
 	left: 148px;
 	text-align: center;
 	color: white;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½";
 	font-size: 24px;
 }
 #Fanwei{
@@ -248,6 +248,9 @@ body .layui-tree-skin-customThem .layui-tree-branch{color: #EDCA50;}
 }
 
 .rk-hidden{
+	display:none !important;
+}
+.permanently-hidden{
 	display:none !important;
 }
 .rk-small-font{

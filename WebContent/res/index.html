@@ -63,6 +63,7 @@
 				</div>
 			</div>
 			<!--tree-->
+			<!--这里是map初始化  -->
 			<div class="gaobiao-map" id="viewDiv" style="width: 100%;height: 99%;margin-top: 36px;">
 			</div>
 		</div>
@@ -77,8 +78,10 @@
 	  	<script src="js/jquery.ztree.excheck.js" type="text/javascript" charset="utf-8"></script>
 	  	<script src="js/jquery.ztree.exhide.js" type="text/javascript" charset="utf-8"></script>
 		<!--ztree的初始化-->
+		<!--先创建ztree之后才初始化的地图  -->
 		<script src="js/ztreeCreate.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/gisinit.js" type="text/javascript" charset="utf-8"></script>
+		<!--点击搜索按钮后弹出层的div  -->
 		<div id="selectedNode-info-outer">
 			<div id="selectedNode-info">
 		    	<p class="words" id="YearShow"></p>
@@ -96,7 +99,7 @@
 				<p class="words" id="SuppPro"></p>
 		    </div>
 		</div>
-		
+		<!-- 点击地图的某一点时弹出的弹出层 -->
 		<div class="tab-hidden" id="tab-info-outer">
 			<div class="tab-info">
 				<div class="layui-tab">

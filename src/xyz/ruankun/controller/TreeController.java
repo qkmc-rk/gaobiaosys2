@@ -68,6 +68,14 @@ public class TreeController {
 		}
 	}
 	
+	/**
+	 * get one node's children is a set array data.
+	 * @param OBJECTID   the nodes id.
+	 * @param session
+	 * @param sessionKey
+	 * @param role    if the role is correct return wrong to front.
+	 * @return
+	 */
 	@RequestMapping(value="/children")
 	@ResponseBody
 	public String childrenNodes(@RequestParam String OBJECTID,HttpSession session,

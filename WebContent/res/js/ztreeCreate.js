@@ -39,8 +39,14 @@ $(document).ready(function() {
         },
         async:'false',
         success:function (data) {
-        	console.log("current from back");
+        	console.log("ztreeCreate第42行：从后台获取当前节点/tree/current   ---current from back，当前节点数据如下");
         	console.log(data);
+        	
+        	//将信息存到sessionStorage中，便于在初始化地图时使用，这里的district在gisinit中调用
+        	console.log("日志-ztreeCreate第46行：将districtCode信息存到sessionStorage中，便于在初始化地图时使用，这里的district在gisinit中调用：" + data.code);
+        	window.sessionStorage.setItem('districtCode',data.code);
+        	window.sessionStorage.setItem('role',data.role);
+        	
         	zNodes_head[0].children.push(data);
         	zNodes_head[1].children[0].children.push(data);
         	zNodes_head[1].children[1].children.push(data);
@@ -54,40 +60,41 @@ $(document).ready(function() {
     });
 });
 
+//当树里的某个节点被点击时触发当前事件
 function zTreeOnClick(e, treeId, treeNode) {
-	console.log("zTreeOnClick");
+	console.log("[日志]ztreeCreate第65行，树节点被点击");
    console.log(treeNode);
    selectedNode = treeNode;
    selectedNodePath = treeNode.getPath();
    //做一个更换地图的操作
    if(treeNode.role == 'province'){
 	  // $("#btn0").click();
-	   console.log("treeNode.role == 'province'");
+	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'province'");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'city'){
 	   //$("#btn1").click();
-	   console.log("treeNode.role == 'city'");
+	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'city'");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'county'){
 	  // $("#btn2").click();
-	   console.log("treeNode.role == 'county'");
+	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'county'");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'namesec'){
 	  // $("#btn2").click();
-	   console.log("treeNode.role == 'namesec'");
+	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'namesec'");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'town'){
 	   //$("#btn2").click();
-	   console.log("treeNode.role == 'town'");
+	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'town'");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'village'){
 	  // $("#btn2").click();
-	   console.log("treeNode.role == 'village'");
+	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'village'");
 	   btnsc(selectedNode);
    }
    //..做一个更换地图的操作完毕
@@ -124,12 +131,13 @@ function zTreeOnClick(e, treeId, treeNode) {
    
 };
 
-function showSelected(){
-	if(selectedNode != undefined){
-		var OBJECTID = selectedNode.id;
+function showSelected(selectNode){
+	console.log("[日志]ztreeCreate第135行，这里为showSelected被调用，显示当前节点信息！！");
+	if(selectNode != undefined){
+		var OBJECTID = selectNode.id;
 		if(OBJECTID == undefined)
 		   return;
-	  	var role = selectedNode.role;
+	  	var role = selectNode.role;
 	  	$.post(
 	  		'../tree/nodeinfo', 
 	  		{
@@ -142,7 +150,7 @@ function showSelected(){
 				
 				var path = selectedNodePath;
 				
-				console.log('xxxxxxxx');
+				console.log('ztreeCreate第151行');
 				console.log(path);
 				
 				if(path[0].name == '2011-2015建设情况'){
@@ -207,7 +215,7 @@ function addHoverDom1(treeId, treeNode) {
 	if (btn) {
 		btn.bind("click", function(){
 			setTimeout(function(){
-				showSelected();
+				showSelected(selectedNode);
 			},200);
 		});
 	}

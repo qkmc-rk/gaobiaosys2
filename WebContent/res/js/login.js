@@ -29,7 +29,7 @@ function ajaxLogin(){
 				}else if(res.code == -1){
 					layui.use('layer', function(){
 						var layer = layui.layer;
-						layer.msg("不支持浏览器,建议采用骨骼浏览器或者360急速浏览器");
+						layer.msg("不支持浏览器,建议采用chrome浏览器或者safari浏览器");
 					});
 				}
 			}else{
