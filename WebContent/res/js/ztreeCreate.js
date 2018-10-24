@@ -43,10 +43,10 @@ $(document).ready(function() {
         	console.log(data);
         	
         	//将信息存到sessionStorage中，便于在初始化地图时使用，这里的district在gisinit中调用
-        	console.log("日志-ztreeCreate第46行：将districtCode信息存到sessionStorage中，便于在初始化地图时使用，这里的district在gisinit中调用：" + data.code);
         	window.sessionStorage.setItem('districtCode',data.code);
+        	window.sessionStorage.setItem('name',data.name);
         	window.sessionStorage.setItem('role',data.role);
-        	
+        	console.log("日志-ztreeCreate第46行：将districtCode信息存到sessionStorage中，便于在初始化地图时使用，这里的district在gisinit中调用：" + data.code + data.name + data.role);
         	zNodes_head[0].children.push(data);
         	zNodes_head[1].children[0].children.push(data);
         	zNodes_head[1].children[1].children.push(data);
