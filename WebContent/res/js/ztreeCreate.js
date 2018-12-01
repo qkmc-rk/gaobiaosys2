@@ -69,32 +69,32 @@ function zTreeOnClick(e, treeId, treeNode) {
    //做一个更换地图的操作
    if(treeNode.role == 'province'){
 	  // $("#btn0").click();
-	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'province'");
+	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'province',开始调用btnsc");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'city'){
 	   //$("#btn1").click();
-	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'city'");
+	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'city',开始调用btnsc");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'county'){
 	  // $("#btn2").click();
-	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'county'");
+	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'county',开始调用btnsc");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'namesec'){
 	  // $("#btn2").click();
-	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'namesec'");
+	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'namesec',开始调用btnsc");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'town'){
 	   //$("#btn2").click();
-	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'town'");
+	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'town',开始调用btnsc");
 	   btnsc(selectedNode);
    }
    if(treeNode.role == 'village'){
 	  // $("#btn2").click();
-	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'village'");
+	   console.log("点击了树种的树节点，树节点类型为：treeNode.role == 'village',开始调用btnsc");
 	   btnsc(selectedNode);
    }
    //..做一个更换地图的操作完毕
