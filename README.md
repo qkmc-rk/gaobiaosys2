@@ -19,3 +19,9 @@ revise at 18.10.13
 ## record
   search invoked position：gisinit.js-->searchPopup()
   
+# 2018-12-7
+## fixed
+- delete the code in the function of btnsc(); this function is now prepared for changing map focus when click on tree node.
+- changed the way of show search popup.and the data from search has changed its format.
+- for details,look at gisinit.js    --> function searchPopup(results) 
+  
