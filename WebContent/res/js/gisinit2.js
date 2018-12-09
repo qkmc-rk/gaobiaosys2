@@ -1,65 +1,66 @@
 var soilURL;
 var view;
 
-require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
+require([ "esri/config" ], function(esriConfig) {
+	esriConfig.request.corsEnabledServers.push("113.54.15.13");
+});
+
+require(
+		[ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 				"esri/tasks/IdentifyTask",
-				"esri/tasks/support/IdentifyParameters", "esri/widgets/Search",
-				"esri/widgets/Legend", "esri/widgets/LayerList" ],
+				"esri/tasks/support/IdentifyParameters", "dojo/_base/array",
+				"dojo/on", "dojo/dom", "esri/widgets/Search",
+				"esri/widgets/LayerList", "esri/widgets/Legend",
+				"dojo/domReady!" ],
 		function(Map, MapView, TileLayer, IdentifyTask, IdentifyParameters,
-				Search, Legend, LayerList) {
+				arrayUtils, on, dom, Search, LayerList, Legend) {
 
 			var identifyTask, params;
 
 			// URL to the map service where the identify will be performed
-			// 更换该地址实现更换地图的目的
 			var districtCode = window.sessionStorage.getItem('districtCode');
-			soilURL = "http://10.255.251.39:6080/arcgis/rest/services/gaobiaotest/"
-					+ districtCode + "/MapServer";
+			soilURL = "http://113.54.15.13:6080/arcgis/rest/services/test/"+ districtCode + "/MapServer";
 
 			// Add the map service as a TileLayer for fast rendering
 			// Tile layers are composed of non-interactive images. For that
 			// reason we'll
 			// use IdentifyTask to query the service to add interactivity to the
 			// app
-			var parcelsLayer = new TileLayer({
+			var parcelsLyr = new TileLayer({
 				url : soilURL,
 				opacity : 0.85
 			});
-
 			var map = new Map({
-			// basemap: "osm"
+				basemap : "osm"
 			});
-			map.add(parcelsLayer);
-
+			map.add(parcelsLyr);
 			view = new MapView({
 				map : map,
 				container : "viewDiv",
 				center : [ 104.06, 30.67 ],
-				zoom : 1
+				zoom : 7
 			});
-
 			view.when(function() {
 				// executeIdentifyTask() is called each time the view is clicked
-				view.on("click", executeIdentifyTask);
-
+				on(view, "click", executeIdentifyTask);
 				// Create identify task for the specified map service
 				identifyTask = new IdentifyTask(soilURL);
-
 				// Set the parameters for the Identify
 				params = new IdentifyParameters();
 				params.tolerance = 3;
-				params.layerIds = [ 1, 2, 3, 4, 5, 6, 7 ];
+				params.layerIds = [ 0, 1, 2, 3, 4, 5, 6 ];
 				params.layerOption = "top";
 				params.width = view.width;
 				params.height = view.height;
+			}, function(error) {
+				console.log(error);
 			});
-
 			// Executes each time the view is clicked
 			function executeIdentifyTask(event) {
 				// Set the geometry to the location of the view click
 				params.geometry = event.mapPoint;
 				params.mapExtent = view.extent;
-				document.getElementById("viewDiv").style.cursor = "wait";
+				dom.byId("viewDiv").style.cursor = "wait";
 
 				// This function returns a promise that resolves to an array of
 				// features
@@ -68,14 +69,10 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 				// originates from
 				identifyTask.execute(params).then(
 						function(response) {
-
 							var results = response.results;
-
-							return results.map(function(result) {
-
+							return arrayUtils.map(results, function(result) {
 								var feature = result.feature;
 								var layerName = result.layerName;
-
 								feature.attributes.layerName = layerName;
 								if (layerName === '省界') {
 									// 这里获取数据并将数据显示在div中
@@ -105,17 +102,17 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 										});
 									}, 500);
 									// 弹出数据
-									// feature.popupTemplate = { // autocasts as
-									// // new
-									// // PopupTemplate()
-									// title : "{省界_高标准农田}",
-									// content : "<b>省界省:</b> {ProName}"
-									// + "<br><b>市:</b> {CityName}"
-									// + "<br><b>县:</b> {CouName}"
-									// + "<br><b>片区:</b> {NamSec}"
-									// + "<br><b>乡镇:</b> {TownName}"
-									// + "<br><b>村:</b> {VilName}"
-									// };
+									feature.popupTemplate = { // autocasts as
+										// new
+										// PopupTemplate()
+										title : "{省界_高标准农田}",
+										content : "<b>省界省:</b> {ProName}"
+												+ "<br><b>市:</b> {CityName}"
+												+ "<br><b>县:</b> {CouName}"
+												+ "<br><b>片区:</b> {NamSec}"
+												+ "<br><b>乡镇:</b> {TownName}"
+												+ "<br><b>村:</b> {VilName}"
+									};
 								}
 								if (layerName === '市州界') {
 									getTabProvinceInfo('',
@@ -144,17 +141,17 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 										});
 									}, 500);
 
-									// feature.popupTemplate = { // autocasts as
-									// // new
-									// // PopupTemplate()
-									// title : "{市州界_高标准农田}",
-									// content : "<b>市州省:</b> {ProName}"
-									// + "<br><b>市:</b> {CityName}"
-									// + "<br><b>县:</b> {CouName}"
-									// + "<br><b>片区:</b> {NamSec}"
-									// + "<br><b>乡镇:</b> {TownName}"
-									// + "<br><b>村:</b> {VilName}"
-									// };
+									feature.popupTemplate = { // autocasts as
+										// new
+										// PopupTemplate()
+										title : "{市州界_高标准农田}",
+										content : "<b>市州省:</b> {ProName}"
+												+ "<br><b>市:</b> {CityName}"
+												+ "<br><b>县:</b> {CouName}"
+												+ "<br><b>片区:</b> {NamSec}"
+												+ "<br><b>乡镇:</b> {TownName}"
+												+ "<br><b>村:</b> {VilName}"
+									};
 								} else if (layerName === '区县界') {
 									getTabProvinceInfo('',
 											feature.attributes.ProName);
@@ -183,17 +180,17 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 											});
 										});
 									}, 500);
-									// feature.popupTemplate = { // autocasts as
-									// // new
-									// // PopupTemplate()
-									// title : "{县区界_高标准农田}",
-									// content : "<b>市州省:</b> {ProName}"
-									// + "<br><b>市:</b> {CityName}"
-									// + "<br><b>县:</b> {CouName}"
-									// + "<br><b>片区:</b> {NamSec}"
-									// + "<br><b>乡镇:</b> {TownName}"
-									// + "<br><b>村:</b> {VilName}"
-									// };
+									feature.popupTemplate = { // autocasts as
+										// new
+										// PopupTemplate()
+										title : "{县区界_高标准农田}",
+										content : "<b>市州省:</b> {ProName}"
+												+ "<br><b>市:</b> {CityName}"
+												+ "<br><b>县:</b> {CouName}"
+												+ "<br><b>片区:</b> {NamSec}"
+												+ "<br><b>乡镇:</b> {TownName}"
+												+ "<br><b>村:</b> {VilName}"
+									};
 								} else if (layerName === '片区界') {
 									getTabProvinceInfo('',
 											feature.attributes.ProName);
@@ -224,17 +221,17 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 											});
 										});
 									}, 500);
-									// feature.popupTemplate = { // autocasts as
-									// // new
-									// // PopupTemplate()
-									// title : "{片区界_高标准农田}",
-									// content : "<b>市州省:</b> {ProName}"
-									// + "<br><b>市:</b> {CityName}"
-									// + "<br><b>县:</b> {CouName}"
-									// + "<br><b>片区:</b> {NamSec}"
-									// + "<br><b>乡镇:</b> {TownName}"
-									// + "<br><b>村:</b> {VilName}"
-									// };
+									feature.popupTemplate = { // autocasts as
+										// new
+										// PopupTemplate()
+										title : "{片区界_高标准农田}",
+										content : "<b>市州省:</b> {ProName}"
+												+ "<br><b>市:</b> {CityName}"
+												+ "<br><b>县:</b> {CouName}"
+												+ "<br><b>片区:</b> {NamSec}"
+												+ "<br><b>乡镇:</b> {TownName}"
+												+ "<br><b>村:</b> {VilName}"
+									};
 								} else if (layerName === '乡镇界') {
 									getTabProvinceInfo('',
 											feature.attributes.ProName);
@@ -266,17 +263,17 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 											});
 										});
 									}, 500);
-									// feature.popupTemplate = { // autocasts as
-									// // new
-									// // PopupTemplate()
-									// title : "{乡镇界_高标准农田}",
-									// content : "<b>市州省:</b> {ProName}"
-									// + "<br><b>市:</b> {CityName}"
-									// + "<br><b>县:</b> {CouName}"
-									// + "<br><b>片区:</b> {NamSec}"
-									// + "<br><b>乡镇:</b> {TownName}"
-									// + "<br><b>村:</b> {VilName}"
-									// };
+									feature.popupTemplate = { // autocasts as
+										// new
+										// PopupTemplate()
+										title : "{乡镇界_高标准农田}",
+										content : "<b>市州省:</b> {ProName}"
+												+ "<br><b>市:</b> {CityName}"
+												+ "<br><b>县:</b> {CouName}"
+												+ "<br><b>片区:</b> {NamSec}"
+												+ "<br><b>乡镇:</b> {TownName}"
+												+ "<br><b>村:</b> {VilName}"
+									};
 								} else if (layerName === '村界') {
 									getTabProvinceInfo('',
 											feature.attributes.ProName);
@@ -310,29 +307,24 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 											});
 										});
 									}, 500);
-									// feature.popupTemplate = { // autocasts as
-									// // new
-									// // PopupTemplate()
-									// title : "{村界_高标准农田}",
-									// content : "<b>市州省:</b> {ProName}"
-									// + "<br><b>市:</b> {CityName}"
-									// + "<br><b>县:</b> {CouName}"
-									// + "<br><b>片区:</b> {NamSec}"
-									// + "<br><b>乡镇:</b> {TownName}"
-									// + "<br><b>村:</b> {VilName}"
-									// };
+									feature.popupTemplate = { // autocasts as
+										// new
+										// PopupTemplate()
+										title : "{村界_高标准农田}",
+										content : "<b>市州省:</b> {ProName}"
+												+ "<br><b>市:</b> {CityName}"
+												+ "<br><b>县:</b> {CouName}"
+												+ "<br><b>片区:</b> {NamSec}"
+												+ "<br><b>乡镇:</b> {TownName}"
+												+ "<br><b>村:</b> {VilName}"
+									};
 								}
-								// feature.popupTemplate = { // autocasts as new
-								// PopupTemplate()
-								// title : "{高标准农田}",
-								// content : "<b>界省:</b> {ProName}"
-								// + "<br><b>市:</b> {CityName}"
-								// + "<br><b>县:</b> {CouName}"
-								// + "<br><b>片区:</b> {NamSec}"
-								// + "<br><b>乡镇:</b> {TownName}"
-								// + "<br><b>村:</b> {VilName}"
-								// };
-
+								/*
+								 * feature.popupTemplate = { // autocasts as new
+								 * PopupTemplate() title: "{高标准农田}", content: "<b>省:</b>
+								 * {ProName}" + "<br><b>市:</b> {CityName}" + "<br><b>县:</b>
+								 * {CouName} " }
+								 */
 								return feature;
 							});
 						}).then(showPopup); // Send the array of features to
@@ -341,38 +333,45 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 				// Shows the results of the Identify in a popup once the promise
 				// is resolved
 				function showPopup(response) {
-					// 屏蔽原来的弹出层，即popuptamplate那块
-					// if (response.length > 0) {
-					// view.popup.open({
-					// features : response,
-					// location : event.mapPoint
-					// });
-					// }
-					document.getElementById("viewDiv").style.cursor = "auto";
+					/*
+					 * if (response.length > 0) { view.popup.open({ features :
+					 * response, location : event.mapPoint }); }
+					 */
+					dom.byId("viewDiv").style.cursor = "auto";
 				}
 			}
-
 			// 搜索开始
+			//rk 在localsession中添加的districtCode，出处：ztreeCreate四十行左右 for next 图层使用
+			console.log("[日志-gisinit.js第345行]"+ window.sessionStorage.getItem('districtCode'));
+			var districtCode = window.sessionStorage.getItem('districtCode');
 			var searchWidget = new Search(
 					{
 						view : view,
 						// allPlaceholder: "District or Senator",
 						sources : [ {
 							featureLayer : {
-								// 更换上边的地址 连接 "/5"，实现对县级搜索
-								url : "http://10.255.251.39:6080/arcgis/rest/services/gaobiaotest/510000/MapServer/5",
+								url : "http://113.54.15.13:6080/arcgis/rest/services/test/" + districtCode  +"/MapServer/5",
 								popupTemplate : { // autocasts as new
 									// PopupTemplate()
-//									title : "Congressional District {CouName} </br>{CouName}, {CouName}",
-//									overwriteActions : true
+									//注释掉刘老师的内容
+									title : "Congressional District {CouName} </br>{CouName}, {CouName}",
+									//overwriteActions : true,
+//									add by rk 这里的内容可以作为一个函数来使用，搜索时调用函数弹出显示信息层.
+									content:function(){
+										//alert("查询的弹出层应该在gisinit 359行代码处添加！{CouName}");
+										//这里的selectedNode是直接调用的ztreeCreate中生成的！
+										console.log("日志-gisinit.js第364行：" + JSON.stringify(selectedNode));
+										showSelected(selectedNode);
+										var CouName = "{CouName}";
+										
+									}
 								}
 							},
-							// searchAllEnabled:false,
 							searchFields : [ "CouName" ],
 							displayField : "CouName",
 							exactMatch : false,
 							outFields : [ "CouName", "CouName", "CouName" ],
-							name : "各区县地图",
+							name : "Congressional Districts",
 							placeholder : "温江区",
 							resultSymbol : {
 								// type: "simple-line", // autocasts as new
@@ -389,103 +388,87 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 
 						} ]
 					});
-			// 搜索 结束
-			
-			//xxxx
-
-			// 搜索界面
+			//测试获取搜索内容
+			searchWidget.on("select-result", function(event){
+  				console.log("测试：" + event.result.name);
+			});
 			// Add the search widget to the top left corner of the view
 			view.ui.add(searchWidget, {
 				position : "top-right"
 			});
-
-			// 搜索后在控制台输出搜索的内容
-			searchWidget.on("select-result", function(event) {
-				//那就把这个函数作为大本营来弹出搜索的时候的框框
-				console.log("[GISINIT 400行]gisinit搜索调用输出：");
-				var json_result = JSON.stringify(event.result);
-				console.log(json_result);
-				//测试
-				searchPopup(json_result);
+			// 搜索结束
+			// 测试开始
+			const layerList = new LayerList({
+				view : view,
+				listItemCreatedFunction : function(event) {
+					const item = event.item;
+					item.panel = {
+						content : "legend",
+						open : true
+					};
+					item.title = "图例";
+				}
 			});
-			// 图例开始
-			var legend = new Legend({
-				view : view
-			});
-			view.ui.add(legend, "bottom-right");
-
+			view.ui.add(layerList, "bottom-right");
+			// 测试结束
+			/*
+			 * 
+			 * //图例开始 var legend = new Legend({ view: view, title: "Legend" });
+			 * view.ui.add(legend, "bottom-right"); //图例结
+			 */
+			// parcelsLyr.visible=false; //隐藏图层
 		});
-
-// 查询时地图的定位开始
+// 查询定位开始:对地图进行定位，即点击左边菜单栏后地图跳转相应位置
 function btnsc(selectedNode) {
-	console.log("[GISINIT419]-->btnsc被调用");
 	require([ "esri/tasks/QueryTask", "esri/tasks/support/Query",
-		"esri/symbols/SimpleFillSymbol", "dojo/domReady!" ], function(
-		QueryTask, Query, SimpleFillSymbol) {
-		console.log("[GISINIT423]-->btnsc被调用,开始定义查询");
-		//查询定位
-		var layer;
-		var role = selectedNode.role;
-		console.log("[GISINIT423]-->btnsc被调用,开始定义查询，:::" + role);
-		if (role == 'city') {
-			layer = '/6';
-		} else if (role == 'county') {
-			layer = '/5';
-		} else if (role == 'namesec') {
-			layer = '/3';
-		} else if (role == 'town') {
-			layer = '/2';
-		} else if (role == 'village') {
-			layer = '/1';
-		} else if (role == 'province') {
-			layer = '/7';
+			"esri/symbols/SimpleFillSymbol", "dojo/domReady!" ], function(
+			QueryTask, Query, SimpleFillSymbol) {
+		// var layerUrl = MapConfig.FEconomiclayerUrl+"/"+layerid;
+		// 根据不同级别生成不同的查询区域，比如市，县，镇，片区等就不一样
+		// console.log("mrruan:");
+		// console.log(selectedNode);
+		var rk_layer;
+		var rk_rank = selectedNode.role;
+		if (rk_rank == 'city') {
+			rk_layer = '/6';
+		} else if (rk_rank == 'county') {
+			rk_layer = '/5';
+		} else if (rk_rank == 'namesec') {
+			rk_layer = '/3';
+		} else if (rk_rank == 'town') {
+			rk_layer = '/2';
+		} else if (rk_rank == 'village') {
+			rk_layer = '/1';
+		} else if (rk_rank == 'province') {
+			rk_layer = '/7';
 		}
-		console.log("[GISINIT423]-->btnsc被调用,开始定义查询，:::" + role + "图层:::" + layer);
-		//定义查询任务
 		var queryTask = new QueryTask({
-			url : "http://10.255.251.39:6080/arcgis/rest/services/gaobiaotest/510000/MapServer/" + layer + "/query"
+			url : soilURL + rk_layer
 		});
-		
 		// 查询条件
 		var name = selectedNode.name;
 		var query = new Query();
 		query.returnGeometry = true;
-		//query.f = 'JSON';
 		query.outFields = [ "*" ];
-		//query.returnExtentsOnly = false;
-		//query.returnDistinctValues = false;
-		//query.returnM = false;
-	//	query.returnZ = false;
-		//query.returnCountOnly = false;
-		//query.returnIdsOnly = false;
-	//	query.returnTrueCurves = false;
-		//query.spatialRel = 'esriSpatialRelIntersects';
-	//	query.geometryType = 'esriGeometryEnvelope';
-		
-		console.log("query is OK");
-		
 		// 不同的区域需要不同的where子句
-		if (role == 'city') {
+		if (rk_rank == 'city') {
 			query.where = "CityName like '%" + name + "%'";
-		} else if (role == 'county') {
+		} else if (rk_rank == 'county') {
 			query.where = "CouName like '%" + name + "%'";
-		} else if (role == 'namesec') {
+		} else if (rk_rank == 'namesec') {
 			query.where = "NameSec like '%" + name + "%'";
-		} else if (role == 'town') {
+		} else if (rk_rank == 'town') {
 			query.where = "TownName like '%" + name + "%'";
-		} else if (role == 'village') {
+		} else if (rk_rank == 'village') {
 			query.where = "VilName like '%" + name + "%'";
-		} else if (role == 'province') {
+		} else if (rk_rank == 'province') {
 			query.where = "ProName like '%" + name + "%'";
 		}
-		console.log("query where is OK");
-		
+
 		queryTask.execute(query).then(function(results) {
 			// debugger;
-			console.log("GISINIT471->queryTask.execute(query) results:" + JSON.stringify(results.features[0])); 
 			var grcphic = results.features[0];
 			view.goTo(grcphic); // 跳转地图
-			console.log("已跳转到地图位置");
 			// 高亮区域
 			// 清空之前高亮区域存在的话
 			view.graphics.removeAll();
@@ -505,82 +488,4 @@ function btnsc(selectedNode) {
 		});
 	});
 };
-//查询时地图的定位结束
-
-/**
- * 该函数用于在搜索的时候
- * @Param NodeNameInfo searchwidget搜索后返回的name字段，可以找到省字段，市字段，等等。。。
- * @returns
- */
-function searchPopup(results) {
-	//1。根据搜索的名字找到应节点的
-	//测试
-	var result = JSON.parse(results);
-	console.log(result);
-	console.log("[gisinit956]searchPopup invoked");
-	var ProName = result.feature.attributes.ProName;
-	var CityName = result.feature.attributes.CityName;
-	var CouName = result.feature.attributes.CouName;
-	var TownName = result.feature.attributes.TownName;
-	var VilName = result.feature.attributes.VilName;
-	var OBJECTID = result.feature.attributes.OBJECTID;
-	
-	var role;
-	
-	console.log(CouName + "  "  + CityName + "   " + ProName + "  " + TownName + "   " + VilName + "  " + OBJECTID);
-	
-	if(CouName != undefined){//当前显示级别为县级
-		role = 'county';
-	}
-	if(ProName != undefined){
-		role = 'province';
-	}
-	if(CityName != undefined){
-		role = 'city';
-	}
-	if(TownName != undefined){
-		role = 'town';
-	}
-	if(VilName != undefined){ 
-		role = 'village';
-	}
-	
-	$.post(
-	  		'../tree/nodeinfo', 
-	  		{
-		  		sessionKey:sessionStorage.getItem('sessionId'),
-		       	OBJECTID:OBJECTID,
-		       	role:role
-			}, function(str){
-				//设置div里面的值
-				str = JSON.parse(str);  //转换为对象
-				
-				var path = selectedNodePath;
-				
-				$('#YearShow').html(str.yearshow);
-				$('#SuppPro').html(str.supppro);
-				$('#Fanwei').html(str.proname + str.cityname + str.couname + str.townname + str.vilname);
-				$('#NamSec').html(str.namsec);
-				$('#LeadInd').html(str.leadind);
-				$('#FarmlandAr').html(str.farmlandar);
-				$('#NewAreasum').html(str.newarea);
-				$('#TrUpAreasum').html(str.truparea);
-				$('#CommFinasum').html(str.commfina);
-				$('#FieAdjusum').html(str.fieadju);
-				$('#IrriDrasum').html(str.irridra);
-				$('#TillWasum').html(str.tillwa);
-				$('#FerFarsum').html(str.ferfar);
-				$('#FaWaCoPrsum').html(str.fawacopr);
-				//....设置div值完成
-				layui.use('layer', function(){
-				  var layer = layui.layer;
-				  layer.open({
-				  	    type: 1,
-				  	    resize:false,
-				  	    title:'查询结果',
-				  	    area:['700px','380px'],
-				  	    content: $('#selectedNode-info-outer').html() //注意，如果str是object，那么需要字符拼接。
-				  	  });
-				});
-	  	});
-}
+//查询定位结束
