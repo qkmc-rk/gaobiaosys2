@@ -25,3 +25,6 @@ revise at 18.10.13
 - changed the way of show search popup.and the data from search has changed its format.
 - for details,look at gisinit.js    --> function searchPopup(results) 
   
+# 2018-12-9
+## fixed
+- fixed function btnsc()，now when you click on the tree node,the map can jump to the right position.
