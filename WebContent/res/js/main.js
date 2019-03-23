@@ -44,7 +44,7 @@ function getTabProvinceInfo(parentName,name){
 			if(str == null){
 				layui.use('layer', function(){
 					var layer = layui.layer;
-					layer.msg("非高标准农田覆盖区域！");
+					layer.msg("省级存在非高标准农田覆盖区域！");
 				});
 				ret = false;
 			}else{
@@ -83,7 +83,7 @@ function getTabCityInfo(parentName,name){
 			if(str == null){
 				layui.use('layer', function(){
 					var layer = layui.layer;
-					layer.msg("非高标准农田覆盖区域！");
+					layer.msg("所在市级行政区域存在非高标准农田覆盖区域！");
 				});
 				ret = false;
 			}else{
@@ -121,7 +121,7 @@ function getTabCountyInfo(parentName,name){
 			if(str == null){
 				layui.use('layer', function(){
 					var layer = layui.layer;
-					layer.msg("非高标准农田覆盖区域！");
+					layer.msg("所在县级行政区域存在非高标准农田覆盖区域！");
 				});
 				ret = false;
 			}else{
@@ -160,7 +160,7 @@ function getTabNameSecInfo(parentName,name){
 			if(str == null){
 				layui.use('layer', function(){
 					var layer = layui.layer;
-					layer.msg("非高标准农田覆盖区域！");
+					layer.msg("所在片区级行政区域存在非高标准农田覆盖区域！");
 				});
 				ret = false;
 			}else{
@@ -198,7 +198,7 @@ function getTabTownInfo(parentName,name){
 			if(str == null){
 				layui.use('layer', function(){
 					var layer = layui.layer;
-					layer.msg("非高标准农田覆盖区域！");
+					layer.msg("所在镇级行政区域存在非高标准农田覆盖区域！");
 				});
 				ret = false;
 			}else{
@@ -236,7 +236,7 @@ function getTabVillageInfo(parentName,name){
 			if(str == null){
 				layui.use('layer', function(){
 					var layer = layui.layer;
-					layer.msg("非高标准农田覆盖区域！");
+					layer.msg("所在村级行政区域存在非高标准农田覆盖区域！");
 				});
 				ret = false;
 			}else{
