@@ -290,4 +290,17 @@ public class Village {
     public void setShapeArea(Float shapeArea) {
         this.shapeArea = shapeArea;
     }
+
+	@Override
+	public String toString() {
+		return "Village [objectid=" + objectid + ", proname=" + proname + ", procode=" + procode + ", cityname="
+				+ cityname + ", citycode=" + citycode + ", couname=" + couname + ", coucode=" + coucode + ", townname="
+				+ townname + ", towncode=" + towncode + ", vilname=" + vilname + ", vilcode=" + vilcode + ", namsec="
+				+ namsec + ", newarea=" + newarea + ", truparea=" + truparea + ", commfina=" + commfina + ", fieadju="
+				+ fieadju + ", irridra=" + irridra + ", fawacopr=" + fawacopr + ", tillwa=" + tillwa + ", ferfar="
+				+ ferfar + ", leadind=" + leadind + ", supppro=" + supppro + ", year=" + year + ", yesno=" + yesno
+				+ ", yearshow=" + yearshow + ", constype=" + constype + ", farmlandar=" + farmlandar + ", shapeLeng="
+				+ shapeLeng + ", shapeArea=" + shapeArea + "]";
+	}
+    
 }

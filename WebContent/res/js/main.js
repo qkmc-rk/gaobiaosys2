@@ -1,4 +1,8 @@
 var global_node;
+//关闭ajax的异步操作
+$.ajaxSetup({ 
+    async : false 
+});     
 
 //用于隐藏侧面导航栏
 function sidebarevent(){
@@ -27,6 +31,7 @@ function sidebarevent(){
 }
 
 function getTabProvinceInfo(parentName,name){
+	var ret = true;
 	$.get(
   		'../tree/infobyname', 
   		{
@@ -36,25 +41,35 @@ function getTabProvinceInfo(parentName,name){
 	       	role:'province'
 		}, function(str){
 			str = JSON.parse(str);
-			//将数据放到div中
-			$('#province-YearShow').html(str.yearshow);
-			$('#province-Fanwei').html(str.proname + str.cityname + str.couname + str.namsec + str.townname + str.vilname);
-			$('#province-NamSec').html(str.namsec);
-			$('#province-LeadInd').html(str.leadind);
-			$('#province-NewAreasum').html(str.newarea);
-			$('#province-TrUpAreasum').html(str.truparea);
-			$('#province-CommFinasum').html(str.commfina);
-			$('#province-FieAdjusum').html(str.fieadju);
-			$('#province-IrriDrasum').html(str.irridra);
-			$('#province-TillWasum').html(str.tillwa);
-			$('#province-FerFarsum').html(str.ferfar);
-			$('#province-FaWaCoPrsum').html(str.fawacopr);
-			$('#province-SuppPro').html(str.supppro);
+			if(str == null){
+				layui.use('layer', function(){
+					var layer = layui.layer;
+					layer.msg("非高标准农田覆盖区域！");
+				});
+				ret = false;
+			}else{
+				//将数据放到div中
+				$('#province-YearShow').html(str.yearshow);
+				$('#province-Fanwei').html(str.proname + str.cityname + str.couname + str.namsec + str.townname + str.vilname);
+				$('#province-NamSec').html(str.namsec);
+				$('#province-LeadInd').html(str.leadind);
+				$('#province-NewAreasum').html(str.newarea);
+				$('#province-TrUpAreasum').html(str.truparea);
+				$('#province-CommFinasum').html(str.commfina);
+				$('#province-FieAdjusum').html(str.fieadju);
+				$('#province-IrriDrasum').html(str.irridra);
+				$('#province-TillWasum').html(str.tillwa);
+				$('#province-FerFarsum').html(str.ferfar);
+				$('#province-FaWaCoPrsum').html(str.fawacopr);
+				$('#province-SuppPro').html(str.supppro);
+			}
 		}
 	);
+	return ret;
 }
 //实际上这个才是最高层的
 function getTabCityInfo(parentName,name){
+	var ret = true;
 	//设置市
 	$.get(
   		'../tree/infobyname', 
@@ -65,24 +80,34 @@ function getTabCityInfo(parentName,name){
 	       	role:'city'
 		}, function(str){
 			str = JSON.parse(str);
-			//将数据放到div中
-			$('#city-YearShow').html(str.yearshow);
-			$('#city-Fanwei').html(str.proname + str.cityname + str.couname + str.namsec + str.townname + str.vilname);
-			$('#city-NamSec').html(str.namsec);
-			$('#city-LeadInd').html(str.leadind);
-			$('#city-NewAreasum').html(str.newarea);
-			$('#city-TrUpAreasum').html(str.truparea);
-			$('#city-CommFinasum').html(str.commfina);
-			$('#city-FieAdjusum').html(str.fieadju);
-			$('#city-IrriDrasum').html(str.irridra);
-			$('#city-TillWasum').html(str.tillwa);
-			$('#city-FerFarsum').html(str.ferfar);
-			$('#city-FaWaCoPrsum').html(str.fawacopr);
-			$('#city-SuppPro').html(str.supppro);
+			if(str == null){
+				layui.use('layer', function(){
+					var layer = layui.layer;
+					layer.msg("非高标准农田覆盖区域！");
+				});
+				ret = false;
+			}else{
+				//将数据放到div中
+				$('#city-YearShow').html(str.yearshow);
+				$('#city-Fanwei').html(str.proname + str.cityname + str.couname + str.namsec + str.townname + str.vilname);
+				$('#city-NamSec').html(str.namsec);
+				$('#city-LeadInd').html(str.leadind);
+				$('#city-NewAreasum').html(str.newarea);
+				$('#city-TrUpAreasum').html(str.truparea);
+				$('#city-CommFinasum').html(str.commfina);
+				$('#city-FieAdjusum').html(str.fieadju);
+				$('#city-IrriDrasum').html(str.irridra);
+				$('#city-TillWasum').html(str.tillwa);
+				$('#city-FerFarsum').html(str.ferfar);
+				$('#city-FaWaCoPrsum').html(str.fawacopr);
+				$('#city-SuppPro').html(str.supppro);
+			}
 		}
 	);
+	return ret;
 }
 function getTabCountyInfo(parentName,name){
+	var ret = true;
 	//设置县
 	$.get(
 		'../tree/infobyname', 
@@ -93,25 +118,35 @@ function getTabCountyInfo(parentName,name){
 	       	role:'county'
 		}, function(str){
 			str = JSON.parse(str);
-			//将数据放到div中
-			$('#county-YearShow').html(str.yearshow);
-			$('#county-Fanwei').html(str.proname + str.cityname + str.couname + str.namsec + str.townname + str.vilname);
-			$('#county-NamSec').html(str.namsec);
-			$('#county-LeadInd').html(str.leadind);
-			$('#county-NewAreasum').html(str.newarea);
-			$('#county-TrUpAreasum').html(str.truparea);
-			$('#county-CommFinasum').html(str.commfina);
-			$('#county-FieAdjusum').html(str.fieadju);
-			$('#county-IrriDrasum').html(str.irridra);
-			$('#county-TillWasum').html(str.tillwa);
-			$('#county-FerFarsum').html(str.ferfar);
-			$('#county-FaWaCoPrsum').html(str.fawacopr);
-			$('#county-SuppPro').html(str.supppro);
+			if(str == null){
+				layui.use('layer', function(){
+					var layer = layui.layer;
+					layer.msg("非高标准农田覆盖区域！");
+				});
+				ret = false;
+			}else{
+				//将数据放到div中
+				$('#county-YearShow').html(str.yearshow);
+				$('#county-Fanwei').html(str.proname + str.cityname + str.couname + str.namsec + str.townname + str.vilname);
+				$('#county-NamSec').html(str.namsec);
+				$('#county-LeadInd').html(str.leadind);
+				$('#county-NewAreasum').html(str.newarea);
+				$('#county-TrUpAreasum').html(str.truparea);
+				$('#county-CommFinasum').html(str.commfina);
+				$('#county-FieAdjusum').html(str.fieadju);
+				$('#county-IrriDrasum').html(str.irridra);
+				$('#county-TillWasum').html(str.tillwa);
+				$('#county-FerFarsum').html(str.ferfar);
+				$('#county-FaWaCoPrsum').html(str.fawacopr);
+				$('#county-SuppPro').html(str.supppro);
+			}
 		}
 	);
+	return ret;
 }
 
 function getTabNameSecInfo(parentName,name){
+	var ret = true;
 	//设置片区
 	$.get(
 		'../tree/infobyname', 
@@ -122,24 +157,34 @@ function getTabNameSecInfo(parentName,name){
 	       	role:'namesec'
 		}, function(str){
 			str = JSON.parse(str);
-			//将数据放到div中
-			$('#namesec-YearShow').html(str.yearshow);
-			$('#namesec-Fanwei').html(str.proname + str.cityname + str.couname + str.namsec + str.townname + str.vilname);
-			$('#namesec-NamSec').html(str.namsec);
-			$('#namesec-LeadInd').html(str.leadind);
-			$('#namesec-NewAreasum').html(str.newarea);
-			$('#namesec-TrUpAreasum').html(str.truparea);
-			$('#namesec-CommFinasum').html(str.commfina);
-			$('#namesec-FieAdjusum').html(str.fieadju);
-			$('#namesec-IrriDrasum').html(str.irridra);
-			$('#namesec-TillWasum').html(str.tillwa);
-			$('#namesec-FerFarsum').html(str.ferfar);
-			$('#namesec-FaWaCoPrsum').html(str.fawacopr);
-			$('#namesec-SuppPro').html(str.supppro);
+			if(str == null){
+				layui.use('layer', function(){
+					var layer = layui.layer;
+					layer.msg("非高标准农田覆盖区域！");
+				});
+				ret = false;
+			}else{
+				//将数据放到div中
+				$('#namesec-YearShow').html(str.yearshow);
+				$('#namesec-Fanwei').html(str.proname + str.cityname + str.couname + str.namsec + str.townname + str.vilname);
+				$('#namesec-NamSec').html(str.namsec);
+				$('#namesec-LeadInd').html(str.leadind);
+				$('#namesec-NewAreasum').html(str.newarea);
+				$('#namesec-TrUpAreasum').html(str.truparea);
+				$('#namesec-CommFinasum').html(str.commfina);
+				$('#namesec-FieAdjusum').html(str.fieadju);
+				$('#namesec-IrriDrasum').html(str.irridra);
+				$('#namesec-TillWasum').html(str.tillwa);
+				$('#namesec-FerFarsum').html(str.ferfar);
+				$('#namesec-FaWaCoPrsum').html(str.fawacopr);
+				$('#namesec-SuppPro').html(str.supppro);
+			}
 		}
 	);
+	return ret;
 }
 function getTabTownInfo(parentName,name){
+	var ret = true;
 	//设置镇
 	$.get(
 		'../tree/infobyname', 
@@ -150,24 +195,34 @@ function getTabTownInfo(parentName,name){
 	       	role:'town'
 		}, function(str){
 			str = JSON.parse(str);
-			//将数据放到div中
-			$('#town-YearShow').html(str.yearshow);
-			$('#town-Fanwei').html(str.cityname + str.couname + str.namsec + str.townname + str.vilname);
-			$('#town-NamSec').html(str.namsec);
-			$('#town-LeadInd').html(str.leadind);
-			$('#town-NewAreasum').html(str.newarea);
-			$('#town-TrUpAreasum').html(str.truparea);
-			$('#town-CommFinasum').html(str.commfina);
-			$('#town-FieAdjusum').html(str.fieadju);
-			$('#town-IrriDrasum').html(str.irridra);
-			$('#town-TillWasum').html(str.tillwa);
-			$('#town-FerFarsum').html(str.ferfar);
-			$('#town-FaWaCoPrsum').html(str.fawacopr);
-			$('#town-SuppPro').html(str.supppro);
+			if(str == null){
+				layui.use('layer', function(){
+					var layer = layui.layer;
+					layer.msg("非高标准农田覆盖区域！");
+				});
+				ret = false;
+			}else{
+				//将数据放到div中
+				$('#town-YearShow').html(str.yearshow);
+				$('#town-Fanwei').html(str.cityname + str.couname + str.namsec + str.townname + str.vilname);
+				$('#town-NamSec').html(str.namsec);
+				$('#town-LeadInd').html(str.leadind);
+				$('#town-NewAreasum').html(str.newarea);
+				$('#town-TrUpAreasum').html(str.truparea);
+				$('#town-CommFinasum').html(str.commfina);
+				$('#town-FieAdjusum').html(str.fieadju);
+				$('#town-IrriDrasum').html(str.irridra);
+				$('#town-TillWasum').html(str.tillwa);
+				$('#town-FerFarsum').html(str.ferfar);
+				$('#town-FaWaCoPrsum').html(str.fawacopr);
+				$('#town-SuppPro').html(str.supppro);
+			}
 		}
 	);
+	return ret;
 }
 function getTabVillageInfo(parentName,name){
+	var ret = true;
 	//设置村
 	$.get(
 		'../tree/infobyname', 
@@ -178,22 +233,31 @@ function getTabVillageInfo(parentName,name){
 	       	role:'village'
 		}, function(str){
 			str = JSON.parse(str);
-			//将数据放到div中
-			$('#village-YearShow').html(str.yearshow);
-			$('#village-Fanwei').html(str.couname + str.namsec + str.townname + str.vilname);
-			$('#village-NamSec').html(str.namsec);
-			$('#village-LeadInd').html(str.leadind);
-			$('#village-NewAreasum').html(str.newarea);
-			$('#village-TrUpAreasum').html(str.truparea);
-			$('#village-CommFinasum').html(str.commfina);
-			$('#village-FieAdjusum').html(str.fieadju);
-			$('#village-IrriDrasum').html(str.irridra);
-			$('#village-TillWasum').html(str.tillwa);
-			$('#village-FerFarsum').html(str.ferfar);
-			$('#village-FaWaCoPrsum').html(str.fawacopr);
-			$('#village-SuppPro').html(str.supppro);
+			if(str == null){
+				layui.use('layer', function(){
+					var layer = layui.layer;
+					layer.msg("非高标准农田覆盖区域！");
+				});
+				ret = false;
+			}else{
+				//将数据放到div中
+				$('#village-YearShow').html(str.yearshow);
+				$('#village-Fanwei').html(str.couname + str.namsec + str.townname + str.vilname);
+				$('#village-NamSec').html(str.namsec);
+				$('#village-LeadInd').html(str.leadind);
+				$('#village-NewAreasum').html(str.newarea);
+				$('#village-TrUpAreasum').html(str.truparea);
+				$('#village-CommFinasum').html(str.commfina);
+				$('#village-FieAdjusum').html(str.fieadju);
+				$('#village-IrriDrasum').html(str.irridra);
+				$('#village-TillWasum').html(str.tillwa);
+				$('#village-FerFarsum').html(str.ferfar);
+				$('#village-FaWaCoPrsum').html(str.fawacopr);
+				$('#village-SuppPro').html(str.supppro);
+			}
 		}
 	);
+	return ret;
 }
 
 //以下几个函数用于清除tab-div中的信息

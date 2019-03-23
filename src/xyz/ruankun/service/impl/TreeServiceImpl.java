@@ -605,7 +605,10 @@ public class TreeServiceImpl implements TreeService {
 			return JSON.toJSONString(town);
 		}else if(role.equals("village")) {
 			try {
+				//System.out.println(parentName + "," + name);
 				village = villageMapper.selectByName(parentName,name);
+				//System.err.println("xxxsxsxsxsxsx:" + village); 
+				
 				
 			} catch (Exception e) {
 				e.printStackTrace();

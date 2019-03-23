@@ -77,11 +77,18 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 								var layerName = result.layerName;
 
 								feature.attributes.layerName = layerName;
+								
+								//判断是否有数据返回
+								var retData = true;
+								
 								if (layerName === '省界') {
 									// 这里获取数据并将数据显示在div中
 									var province = '四川省';
-									getTabProvinceInfo('',
+									retData = getTabProvinceInfo('',
 											feature.attributes.ProName);
+									if(retData == false){
+										return;
+									}
 									clearTabCityInfo();
 									clearTabCountyInfo();
 									clearTabNameSecInfo();
@@ -120,8 +127,11 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 								if (layerName === '市州界') {
 									getTabProvinceInfo('',
 											feature.attributes.ProName);
-									getTabCityInfo(feature.attributes.ProName,
+									retData = getTabCityInfo(feature.attributes.ProName,
 											feature.attributes.CityName);
+									if(retData == false){
+										return;
+									}
 									clearTabCountyInfo();
 									clearTabNameSecInfo();
 									clearTabTownInfo();
@@ -160,9 +170,12 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 											feature.attributes.ProName);
 									getTabCityInfo(feature.attributes.ProName,
 											feature.attributes.CityName);
-									getTabCountyInfo(
+									retData = getTabCountyInfo(
 											feature.attributes.CityName,
 											feature.attributes.CouName);
+									if(retData == false){
+										return;
+									}
 									clearTabNameSecInfo();
 									clearTabTownInfo();
 									clearTabVillageInfo();
@@ -202,9 +215,12 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 									getTabCountyInfo(
 											feature.attributes.CityName,
 											feature.attributes.CouName);
-									getTabNameSecInfo(
+									retData = getTabNameSecInfo(
 											feature.attributes.CouName,
 											feature.attributes.NamSec);
+									if(retData == false){
+										return;
+									}
 									clearTabTownInfo();
 									clearTabVillageInfo();
 									// 激活tab
@@ -246,8 +262,11 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 									getTabNameSecInfo(
 											feature.attributes.CouName,
 											feature.attributes.NamSec);
-									getTabTownInfo(feature.attributes.NamSec,
+									retData = getTabTownInfo(feature.attributes.NamSec,
 											feature.attributes.TownName);
+									if(retData == false){
+										return;
+									}
 									clearTabVillageInfo();
 									// 激活tab
 									activeTown();
@@ -290,9 +309,12 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 											feature.attributes.NamSec);
 									getTabTownInfo(feature.attributes.NamSec,
 											feature.attributes.TownName);
-									getTabVillageInfo(
+									retData = getTabVillageInfo(
 											feature.attributes.TownName,
 											feature.attributes.VilName);
+									if(retData == false){
+										return;
+									}
 									// 激活tab
 									activeVillage();
 									// 获取数据延时
@@ -348,6 +370,7 @@ require([ "esri/Map", "esri/views/MapView", "esri/layers/TileLayer",
 					// location : event.mapPoint
 					// });
 					// }
+					//alert("show pop up");
 					document.getElementById("viewDiv").style.cursor = "auto";
 				}
 			}

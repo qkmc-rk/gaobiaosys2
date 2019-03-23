@@ -67,10 +67,10 @@
   </select>
   
   <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from village
-    where VilName = #{name} and TownName=#{parentName}
+    where VilName = #{name} and TownName=#{parentName} and NamSec != '' limit 1
   </select>
   
   <insert id="insert" parameterType="xyz.ruankun.model.Village" >
