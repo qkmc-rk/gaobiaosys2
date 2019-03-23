@@ -28,3 +28,6 @@ revise at 18.10.13
 # 2018-12-9
 ## fixed
 - fixed function btnsc()，now when you click on the tree node,the map can jump to the right position.
+
+# 2019-03-23
+- fixed the problem:when different user logined,the pop up window when clicked on map is not correct.

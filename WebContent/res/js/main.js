@@ -439,24 +439,48 @@ function activeVillage(){
 //比如县级用户登录，那么他永远也看不到省级和市级的数据！
 $(document).ready(function(){
 	var role = window.sessionStorage.getItem('role');
-	if(role != 'province'){
+//	if(role != 'province'){
+//		$('#tab-province-li').addClass('permanently-hidden');
+//	}
+//	if(role != 'province' && role != 'city'){
+//		$('#tab-province-li').addClass('permanently-hidden');
+//		$('#tab-city-li').addClass('permanently-hidden');
+//	}
+//	if(role != 'province' && role != 'city' && role != 'namesec'){
+//		$('#tab-province-li').addClass('permanently-hidden');
+//		$('#tab-city-li').addClass('permanently-hidden');
+//		$('#tab-namesec-li').addClass('permanently-hidden');
+//	}
+//	if(role != 'province' && role != 'city' && role != 'namesec' && role != 'town'){
+//		$('#tab-province-li').addClass('permanently-hidden');
+//		$('#tab-city-li').addClass('permanently-hidden');
+//		$('#tab-namesec-li').addClass('permanently-hidden');
+//		$('#tab-town-li').addClass('permanently-hidden');
+//	}
+	
+	//重写
+	if(role == 'city'){
 		$('#tab-province-li').addClass('permanently-hidden');
-	}
-	if(role != 'province' && role != 'city'){
+	}else if(role == 'county'){
 		$('#tab-province-li').addClass('permanently-hidden');
 		$('#tab-city-li').addClass('permanently-hidden');
-	}
-	if(role != 'province' && role != 'city' && role != 'namesec'){
+	}else if(role == 'namesec'){
 		$('#tab-province-li').addClass('permanently-hidden');
 		$('#tab-city-li').addClass('permanently-hidden');
+		$('#tab-county-li').addClass('permanently-hidden');
+	}else if(role == 'town'){
+		$('#tab-province-li').addClass('permanently-hidden');
+		$('#tab-city-li').addClass('permanently-hidden');
+		$('#tab-county-li').addClass('permanently-hidden');
 		$('#tab-namesec-li').addClass('permanently-hidden');
-	}
-	if(role != 'province' && role != 'city' && role != 'namesec' && role != 'town'){
+	}else if(role == 'village'){
 		$('#tab-province-li').addClass('permanently-hidden');
 		$('#tab-city-li').addClass('permanently-hidden');
+		$('#tab-county-li').addClass('permanently-hidden');
 		$('#tab-namesec-li').addClass('permanently-hidden');
 		$('#tab-town-li').addClass('permanently-hidden');
 	}
+	
 });
 
 
